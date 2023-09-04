@@ -55,6 +55,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D142EECC2AA60E9A00F5CF9A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D142EECA2AA60CE200F5CF9A /* Video.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D142EECD2AA60EB500F5CF9A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D142EECE2AA60EC500F5CF9A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D142EEC82AA60CB000F5CF9A /* MainTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		E7280B982AA5FA8500D30303 = {
 			isa = PBXGroup;
 			children = (
@@ -86,19 +109,10 @@
 		E7280BBA2AA5FBA500D30303 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				E7280BCD2AA5FE2F00D30303 /* Cells */,
+				D142EECE2AA60EC500F5CF9A /* Cells */,
 				E7280BA82AA5FA8500D30303 /* ViewController.swift */,
-				D142EEC82AA60CB000F5CF9A /* MainTableViewCell.swift */,
-				D142EECA2AA60CE200F5CF9A /* Video.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		E7280BBB2AA5FBB900D30303 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		E7280BBC2AA5FBD900D30303 /* Storyboards */ = {
@@ -116,20 +130,13 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		E7280BBD2AA5FC0000D30303 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		E7280BBE2AA5FCB000D30303 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D142EECD2AA60EB500F5CF9A /* Extensions */,
 				E7280BAD2AA5FA8600D30303 /* Assets.xcassets */,
 				E7280BA62AA5FA8500D30303 /* SceneDelegate.swift */,
 				E7280BA42AA5FA8500D30303 /* AppDelegate.swift */,
-				E7280BBD2AA5FC0000D30303 /* Extensions */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -137,17 +144,10 @@
 		E7280BBF2AA5FCB900D30303 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E7280BBB2AA5FBB900D30303 /* Models */,
+				D142EECC2AA60E9A00F5CF9A /* Models */,
 				E7280BBA2AA5FBA500D30303 /* ViewControllers */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		E7280BCD2AA5FE2F00D30303 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
