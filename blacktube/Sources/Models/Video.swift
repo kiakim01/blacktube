@@ -12,4 +12,5 @@ struct Video {
     let thumbnailURL: URL
     let publishedAt: String
     let viewCount: String
+    let channelTitle: String
 }
