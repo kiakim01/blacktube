@@ -15,17 +15,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTable()
-        fetchYoutubeData()
-    }
-    
-    func configureTable() {
+        
         tableView.dataSource = self
         tableView.delegate = self
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.separatorStyle = .singleLine
-        tableView.separatorInset = .zero
+        
+        fetchYoutubeData()
     }
     
     func fetchYoutubeData() {
