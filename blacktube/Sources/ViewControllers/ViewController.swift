@@ -42,13 +42,11 @@ class ViewController: UIViewController {
                    let thumbnails = snippet["thumbnails"] as? [String: Any],
                    let standardThumbnail = thumbnails["standard"] as? [String: Any],
                    let thumbnailURL = URL(string: standardThumbnail["url"] as! String),
-                   let title = snippet["title"] as? String,
-                   let publishedAt = snippet["publishedAt"] as? String {
+                   let title = snippet["title"] as? String {
                     
                     let video = Video(
                         title: title,
                         thumbnailURL: thumbnailURL,
-                        publishedAt: publishedAt,
                         viewCount: viewCount,
                         channelTitle: channelTitle
                     )
@@ -76,20 +74,6 @@ extension ViewController: UITableViewDataSource {
         
         cell.titleLabel.text = video.title
         
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-//
-//        if let publishedAt = dateFormatter.date(from: video.publishedAt) {
-//            dateFormatter.dateFormat = "yyyy-MM-dd"
-//            let formattedDate = dateFormatter.string(from: publishedAt)
-//
-//            cell.publishLabel.text = formattedDate
-//        } else {
-//            cell.publishLabel.text = video.publishedAt
-//        }
-        
-        cell.publishLabel.text = ""
-        
         if let viewCountInt = Int(video.viewCount) {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
@@ -101,6 +85,11 @@ extension ViewController: UITableViewDataSource {
         
         cell.channelLabel.text = "\(video.channelTitle)  ·"
         cell.channelLabel.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        
+        cell.heartButton.isSelected = false
+        cell.heartButton.tintColor = .clear
+        let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
+        cell.heartButton.setImage(heart, for: .normal)
         
         DispatchQueue.global().async {
             if let imageData = try? Data(contentsOf: video.thumbnailURL) {
