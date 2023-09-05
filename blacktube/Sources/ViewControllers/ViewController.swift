@@ -48,7 +48,8 @@ class ViewController: UIViewController {
                         title: title,
                         thumbnailURL: thumbnailURL,
                         viewCount: viewCount,
-                        channelTitle: channelTitle
+                        channelTitle: channelTitle,
+                        item: item
                     )
                     self.videos.append(video)
                 }
