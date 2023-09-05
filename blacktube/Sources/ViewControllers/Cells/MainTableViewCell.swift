@@ -13,6 +13,7 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var publishLabel: UILabel!
     @IBOutlet weak var viewCountLabel: UILabel!
+    @IBOutlet weak var channelLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
