@@ -93,7 +93,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" selectedImage="house.fill" catalog="system" id="kZh-iY-LJl"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" selectedImage="house.fill" id="kZh-iY-LJl"/>
                     <navigationItem key="navigationItem" id="D6a-j9-Pdr"/>
                     <connections>
                         <outlet property="tableView" destination="pl1-lp-IA3" id="cIw-RY-VtZ"/>
