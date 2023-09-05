@@ -116,7 +116,7 @@ extension SignUpPage{
         NSLayoutConstraint.activate([signUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -50),
                                      signUpButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
                                      signUpButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-                                     signUpButton.heightAnchor.constraint(equalToConstant: 80)
+                                     signUpButton.heightAnchor.constraint(equalToConstant: 70)
                                     ])
       
 
