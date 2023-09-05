@@ -12,19 +12,55 @@
         <!--Like-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="LikePageViewController" customModule="blacktube" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gB-qA-pC6">
+                                <rect key="frame" x="0.0" y="50" width="393" height="44"/>
+                                <color key="barTintColor" systemColor="systemBackgroundColor"/>
+                                <items>
+                                    <navigationItem title="Title" id="1N8-n7-pJA"/>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2hl-G1-qFq">
+                                <rect key="frame" x="0.0" y="94" width="393" height="675"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="5vc-rx-pJV">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5vc-rx-pJV" id="oLG-nF-9jA">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7gB-qA-pC6" secondAttribute="trailing" id="G12-FZ-S3W"/>
+                            <constraint firstItem="2hl-G1-qFq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Nx8-Dd-lHY"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2hl-G1-qFq" secondAttribute="trailing" id="V6M-Gj-jo0"/>
+                            <constraint firstItem="2hl-G1-qFq" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="Vnm-MT-Uwo"/>
+                            <constraint firstItem="7gB-qA-pC6" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="50" id="dLL-8g-zkA"/>
+                            <constraint firstItem="7gB-qA-pC6" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="mRV-W7-MNg"/>
+                            <constraint firstItem="7gB-qA-pC6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ojt-jh-qMd"/>
+                            <constraint firstItem="2hl-G1-qFq" firstAttribute="top" secondItem="7gB-qA-pC6" secondAttribute="bottom" id="ood-O3-Lo5"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Like" id="pHa-fg-d5H"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="2hl-G1-qFq" id="uw5-B8-2oO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="125" y="-34"/>
+            <point key="canvasLocation" x="124.42748091603053" y="-34.507042253521128"/>
         </scene>
     </scenes>
     <resources>
