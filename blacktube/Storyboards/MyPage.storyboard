@@ -54,6 +54,9 @@
                                         <rect key="frame" x="122.33333333333334" y="0.0" width="83" height="34.333333333333336"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="tinted" title="로그아웃"/>
+                                        <connections>
+                                            <segue destination="eYZ-T7-igt" kind="show" id="RcR-PY-2lh"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -131,6 +134,13 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="내가 좋아요 한 동영상" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oz-0I-nrI">
+                                <rect key="frame" x="16" y="397" width="146" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -144,7 +154,7 @@
                             <constraint firstItem="oR2-5D-kgg" firstAttribute="top" secondItem="Swv-Xg-f1m" secondAttribute="bottom" constant="24" id="xp5-Bh-7vh"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="MyPage" selectedImage="person.circle.fill" catalog="system" id="CgF-af-3ag"/>
+                    <tabBarItem key="tabBarItem" title="MyPage" image="person.circle.fill" catalog="system" selectedImage="person.circle.fill" id="CgF-af-3ag"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="editProfileButton" destination="Qf6-Nx-HRi" id="U5L-pX-NtB"/>
@@ -158,6 +168,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="124.42748091603053" y="-34.507042253521128"/>
+        </scene>
+        <!--LoginPage-->
+        <scene sceneID="gph-gv-Qf1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="LoginPage" id="eYZ-T7-igt" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="XCA-1E-nJo"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lnf-Z5-jgS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="902" y="-159"/>
         </scene>
     </scenes>
     <resources>
