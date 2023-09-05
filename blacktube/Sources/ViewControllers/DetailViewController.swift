@@ -57,9 +57,12 @@ class DetailViewController: UIViewController {
         titleLabel.text = video?.title
         channelLabel.text = (video?.channelTitle)! + "  ·"
         var tagText = ""
-        for tag in tags! {
-            tagText += "#\(tag) "
+        if tags != nil {
+            for tag in tags! {
+                tagText += "#\(tag) "
+            }
         }
+
         tagLabel.text = tagText
         videoDate.text = "Uploaded at " + publishedDate
         videoDescription.text = snippet["description"] as? String
