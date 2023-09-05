@@ -15,7 +15,7 @@ class  SignUpCustomCell : UITableViewCell{
         label.text = ""
         //        label.backgroundColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
-        label.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 90).isActive = true
         //        label.frame = CGRect(x: 0, y: 0, width: 65, height: 25)
         //        label.layer.addBorder([.right], color: UIColor.gray, width: 0.5)
         return label
@@ -30,6 +30,9 @@ class  SignUpCustomCell : UITableViewCell{
         let placeholderPadding = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = placeholderPadding
         textField.leftViewMode = .always
+        textField.frame.size.width = 180
+        textField.frame.size.height = 35
+        textField.layer.addBorder([.bottom], color: UIColor.gray, width: 0.5)
         
         return textField
     }()
@@ -50,6 +53,24 @@ class  SignUpCustomCell : UITableViewCell{
       
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+//        if selected {
+//            contentView.layer.borderWidth = 2
+//            contentView.layer.borderColor = UIColor.lightGray.cgColor
+//        } else {
+//            contentView.layer.borderWidth = 0
+//            contentView.layer.borderColor = UIColor.lightGray.cgColor
+//        }
+    }
+
+    override func layoutSubviews() {
+           // 테이블 뷰 셀 사이의 간격
+           super.layoutSubviews()
+
+           contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0))
+       }
     
     
     
@@ -68,24 +89,29 @@ extension SignUpCustomCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(userInput)
         contentView.addSubview(checkIcon)
+//        contentView.backgroundColor = UIColor.green
+        
     }
     func setLayout(){
+       
+//        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor,constant: 10),
+        titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor,constant: 30),
         titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
         
         userInput.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            userInput.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 5),
+                        userInput.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 5),
             userInput.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             userInput.rightAnchor.constraint(equalTo: checkIcon.leftAnchor,constant: -10)
         ])
         
         checkIcon.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            checkIcon.rightAnchor.constraint(equalTo: contentView.rightAnchor,constant: -10),
+            checkIcon.rightAnchor.constraint(equalTo: contentView.rightAnchor,constant: -30),
             checkIcon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
         

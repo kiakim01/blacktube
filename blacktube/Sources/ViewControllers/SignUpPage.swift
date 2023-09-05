@@ -14,10 +14,33 @@ class SignUpPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let placeHolder: String
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SignUpCustomCell", for:indexPath)
+            as! SignUpCustomCell
+        
+        let signUpList = data[indexPath.row]
+        cell.titleLabel.text = signUpList.title
+        cell.userInput.placeholder = signUpList.placeHolder
+        
+//        cell.checkIcon.isHidden =true
+        
+        return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
     let data:[SignUpList] = [
        SignUpList(title: "ID", placeHolder: "ID를 입력해주세요"),
-       SignUpList(title: "비밀번호", placeHolder: "비밀번호를 입력해주세요"),
-       SignUpList(title: "확인", placeHolder: "비밀번호를 다시 입력해주세요")
+       SignUpList(title: "Password", placeHolder: "비밀번호를 입력해주세요"),
+       SignUpList(title: "Password\ncheck", placeHolder: "비밀번호를 다시 입력해주세요"),
+       SignUpList(title: "Name", placeHolder: "이름을 입력해주세요"),
+       SignUpList(title: "E-mail", placeHolder: "이메일을 입력해주세요")
+       
     ]
     
     let InfoLabel : UILabel = {
@@ -61,22 +84,6 @@ class SignUpPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension SignUpPage{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SignUpCustomCell", for:indexPath)
-            as! SignUpCustomCell
-        
-        let signUpList = data[indexPath.row]
-        cell.titleLabel.text = signUpList.title
-        cell.userInput.placeholder = signUpList.placeHolder
-        
-        return cell
-    }
-}
 
 
 extension SignUpPage{
@@ -86,7 +93,7 @@ extension SignUpPage{
         UserInfoArea.addSubview(UserInfotableView)
         UserInfotableView.delegate = self
         UserInfotableView.dataSource = self
-        
+        UserInfotableView.separatorStyle = .none
         self.view.addSubview(signUpButton)
         
     }
@@ -106,7 +113,7 @@ extension SignUpPage{
                                     ])
         UserInfotableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            UserInfotableView.topAnchor.constraint(equalTo: UserInfoArea.topAnchor),
+            UserInfotableView.topAnchor.constraint(equalTo: UserInfoArea.topAnchor,constant: 30),
             UserInfotableView.bottomAnchor.constraint(equalTo: UserInfoArea.bottomAnchor),
             UserInfotableView.leftAnchor.constraint(equalTo: UserInfoArea.leftAnchor),
             UserInfotableView.rightAnchor.constraint(equalTo: UserInfoArea.rightAnchor)
