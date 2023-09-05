@@ -38,6 +38,7 @@ class ViewController: UIViewController {
                 if let snippet = item["snippet"] as? [String: Any],
                    let statistics = item["statistics"] as? [String: Any],
                    let viewCount = statistics["viewCount"] as? String,
+                   let channelTitle = snippet["channelTitle"] as? String,
                    let thumbnails = snippet["thumbnails"] as? [String: Any],
                    let standardThumbnail = thumbnails["standard"] as? [String: Any],
                    let thumbnailURL = URL(string: standardThumbnail["url"] as! String),
@@ -48,7 +49,8 @@ class ViewController: UIViewController {
                         title: title,
                         thumbnailURL: thumbnailURL,
                         publishedAt: publishedAt,
-                        viewCount: viewCount
+                        viewCount: viewCount,
+                        channelTitle: channelTitle
                     )
                     self.videos.append(video)
                 }
@@ -74,25 +76,31 @@ extension ViewController: UITableViewDataSource {
         
         cell.titleLabel.text = video.title
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+//
+//        if let publishedAt = dateFormatter.date(from: video.publishedAt) {
+//            dateFormatter.dateFormat = "yyyy-MM-dd"
+//            let formattedDate = dateFormatter.string(from: publishedAt)
+//
+//            cell.publishLabel.text = formattedDate
+//        } else {
+//            cell.publishLabel.text = video.publishedAt
+//        }
         
-        if let publishedAt = dateFormatter.date(from: video.publishedAt) {
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let formattedDate = dateFormatter.string(from: publishedAt)
-            
-            cell.publishLabel.text = formattedDate
-        } else {
-            cell.publishLabel.text = video.publishedAt
-        }
+        cell.publishLabel.text = ""
         
         if let viewCountInt = Int(video.viewCount) {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
             if let formattedViewCount = formatter.string(from: NSNumber(value:viewCountInt)) {
                 cell.viewCountLabel.text = "\(formattedViewCount) views"
+                cell.viewCountLabel.font = UIFont.systemFont(ofSize: 12,weight: .thin)
             }
         }
+        
+        cell.channelLabel.text = "\(video.channelTitle)  ·"
+        cell.channelLabel.font = UIFont.systemFont(ofSize: 12, weight: .thin)
         
         DispatchQueue.global().async {
             if let imageData = try? Data(contentsOf: video.thumbnailURL) {

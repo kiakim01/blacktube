@@ -114,9 +114,9 @@
 		E7280BBA2AA5FBA500D30303 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D142EECE2AA60EC500F5CF9A /* Cells */,
 				E7280BA82AA5FA8500D30303 /* ViewController.swift */,
 				E764804D2AA6B67100E98C07 /* MyPageViewController.swift */,
+				D142EECE2AA60EC500F5CF9A /* Cells */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
