@@ -12,10 +12,30 @@
         <!--Search-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="SearchPage" customModule="blacktube" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEE-MJ-XGB">
+                                <rect key="frame" x="162" y="261" width="69" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="로그인"/>
+                                <connections>
+                                    <segue destination="DjH-ye-GEG" kind="show" id="yth-OI-6g0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkA-kK-FXt">
+                                <rect key="frame" x="158" y="337" width="83" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="회원가입"/>
+                                <connections>
+                                    <segue destination="rCf-MT-4RD" kind="show" id="fkl-IH-oHX"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -25,6 +45,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="125" y="-34"/>
+        </scene>
+        <!--LoginPage-->
+        <scene sceneID="Nwf-um-DQh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="LoginPage" id="DjH-ye-GEG" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="aHC-LK-wLH"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hbh-1z-XFh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="587" y="-139"/>
+        </scene>
+        <!--SignUpPage-->
+        <scene sceneID="qbo-eH-h7k">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SignUpPage" id="rCf-MT-4RD" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="aHR-Q4-NGh"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fdP-Bv-E0L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="615" y="-1"/>
         </scene>
     </scenes>
     <resources>
