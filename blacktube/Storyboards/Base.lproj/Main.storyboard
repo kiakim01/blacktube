@@ -99,11 +99,22 @@
                     <navigationItem key="navigationItem" id="D6a-j9-Pdr"/>
                     <connections>
                         <outlet property="tableView" destination="pl1-lp-IA3" id="cIw-RY-VtZ"/>
+                        <segue destination="IZZ-Ls-ZtX" kind="show" identifier="MainToDetail" id="U2w-xE-uNk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1977.8625954198471" y="-34.507042253521128"/>
+        </scene>
+        <!--DetailPage-->
+        <scene sceneID="sMs-Mo-s1X">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DetailPage" id="IZZ-Ls-ZtX" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="rnu-T5-P7C"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Rw-yc-p3c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2613" y="-140"/>
         </scene>
         <!--SearchPage-->
         <scene sceneID="J7N-o9-Es7">
