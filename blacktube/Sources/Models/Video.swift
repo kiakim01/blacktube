@@ -10,7 +10,6 @@ import Foundation
 struct Video {
     let title: String
     let thumbnailURL: URL
-    let publishedAt: String
     let viewCount: String
     let channelTitle: String
 }
