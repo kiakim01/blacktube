@@ -7,10 +7,16 @@
 
 import Foundation
 
-struct Video {
+struct Video: Equatable {
+    static func == (lhs: Video, rhs: Video) -> Bool {
+        return lhs.title == rhs.title && lhs.channelTitle == rhs.channelTitle
+    }
+    
     let title: String
     let thumbnailURL: URL
     let viewCount: String
     let channelTitle: String
     let item: [String: Any]
 }
+
+var likedVideos: [Video] = []
