@@ -31,9 +31,10 @@ class MyPageViewController: UIViewController {
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var userEmailLabel: UILabel!
+    @IBOutlet var editProfileButton: UIButton!
     @IBOutlet var logOutButton: UIButton!
     
-    @IBOutlet var editProfileButton: UIButton!
+ 
     @IBOutlet var likedVideosCollectionView: UICollectionView!
     
     // MARK: - View Life Cycle
