@@ -22,6 +22,7 @@
 		E7280BCA2AA5FDF600D30303 /* LikePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7280BC92AA5FDF600D30303 /* LikePage.storyboard */; };
 		E7280BCC2AA5FE0100D30303 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7280BCB2AA5FE0100D30303 /* MyPage.storyboard */; };
 		E76480492AA609B900E98C07 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E76480482AA609B900E98C07 /* .gitignore */; };
+		E764804E2AA6B67100E98C07 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764804D2AA6B67100E98C07 /* MyPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		E7280BC92AA5FDF600D30303 /* LikePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LikePage.storyboard; sourceTree = "<group>"; };
 		E7280BCB2AA5FE0100D30303 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
 		E76480482AA609B900E98C07 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		E764804D2AA6B67100E98C07 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			children = (
 				D142EECE2AA60EC500F5CF9A /* Cells */,
 				E7280BA82AA5FA8500D30303 /* ViewController.swift */,
+				E764804D2AA6B67100E98C07 /* MyPageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7280BA92AA5FA8500D30303 /* ViewController.swift in Sources */,
+				E764804E2AA6B67100E98C07 /* MyPageViewController.swift in Sources */,
 				E7280BA52AA5FA8500D30303 /* AppDelegate.swift in Sources */,
 				D142EEC92AA60CB000F5CF9A /* MainTableViewCell.swift in Sources */,
 				E7280BA72AA5FA8500D30303 /* SceneDelegate.swift in Sources */,
