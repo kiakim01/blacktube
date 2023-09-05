@@ -9,7 +9,6 @@ import UIKit
 import WebKit
 
 class DetailViewController: UIViewController {
-    
     var video: Video?
     @IBOutlet weak var videoView: WKWebView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -17,6 +16,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var viewCountLabel: UILabel!
     @IBOutlet weak var videoDescription: UITextView!
     @IBOutlet weak var videoDate: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -50,7 +50,27 @@ class DetailViewController: UIViewController {
         channelLabel.text = (video?.channelTitle)! + "  ·"
         videoDate.text = "Uploaded at " + publishedDate
         videoDescription.text = snippet["description"] as? String
+        likeButton.tintColor = .red
+//        if likedVideo[video?.item["id"] as! String] != nil{
+//            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+//        }
+//        else {
+//            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+//        }
+        likeButton.addTarget(self, action: #selector(ClickButton), for: .touchUpInside)
         
+    }
+    
+    @objc func ClickButton (_ sender: UIButton) {
+//        if likedVideo[video?.item["id"] as! String] == nil {
+//            likedVideo[video?.item["id"] as! String] = video!
+//            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+//        }
+//        else {
+//            likedVideo.removeValue(forKey: video?.item["id"] as! String)
+//            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+//        }
+//        print(likedVideo.count)
     }
     
     // WKWebView에 영상의 id를 이용하여 유튜브에서 영상을 로드하는 함수

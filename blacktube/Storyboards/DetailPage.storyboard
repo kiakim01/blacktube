@@ -91,6 +91,7 @@
                     </view>
                     <connections>
                         <outlet property="channelLabel" destination="JIN-9H-go6" id="4dL-fI-DLM"/>
+                        <outlet property="likeButton" destination="eSU-5k-g21" id="4Yh-tb-v9k"/>
                         <outlet property="titleLabel" destination="z5y-lk-drH" id="23D-bK-pYa"/>
                         <outlet property="videoDate" destination="hzW-zB-yVh" id="U5r-hl-lRp"/>
                         <outlet property="videoDescription" destination="8bx-vW-Fe8" id="YfW-bm-HSd"/>
