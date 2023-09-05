@@ -11,6 +11,7 @@ class MyPageViewController: UIViewController {
     
     // MARK: - Properties
     
+    var likedVideos: [Video] = []
     
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
@@ -32,6 +33,7 @@ class MyPageViewController: UIViewController {
         userImage.backgroundColor = .lightGray
         userImage.layer.masksToBounds = true
         userImage.layer.cornerRadius = userImage.frame.width / 2
+        
     }
 
 }
@@ -39,12 +41,21 @@ class MyPageViewController: UIViewController {
 // MARK: - Collection View
 extension MyPageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+//        return likedVideos.count
+        return 25
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LikedVideosCollectionViewCell", for: indexPath)
-            return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LikedVideosCollectionViewCell", for: indexPath) as! LikedVideosCollectionViewCell
+        cell.layer.cornerRadius = 10
+        
+        // indexPath를 사용하여 해당 셀에 표시할 데이터를 가져옴
+//        let video = likedVideos[indexPath.row]
+            
+        // 셀에 데이터를 설정
+//        cell.configure(video)
+        
+        return cell
     }
     
     
