@@ -5,7 +5,9 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,18 +18,97 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="X7W-ib-4EA">
+                                <rect key="frame" x="20" y="89" width="353" height="192"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A3j-VU-vyc">
+                                        <rect key="frame" x="0.0" y="0.0" width="169" height="192"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pEV-pP-T6l">
+                                        <rect key="frame" x="184" y="0.0" width="169" height="192"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpo-PP-9Uf">
+                                                <rect key="frame" x="0.0" y="0.0" width="169" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haf-4C-ZXB">
+                                                <rect key="frame" x="0.0" y="79" width="169" height="20.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6u-dO-MfD">
+                                                <rect key="frame" x="0.0" y="157.66666666666666" width="169" height="34.333333333333343"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="로그아웃"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내가 좋아요 한 영상" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRC-1b-1lz">
+                                <rect key="frame" x="20" y="311" width="131" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CEY-Oq-bnZ">
+                                <rect key="frame" x="20" y="341.33333333333326" width="353" height="427.66666666666674"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tuu-rQ-DXn">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LikedVideosCollectionViewCell" id="Vxz-il-A6t">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="l1W-Fu-F28">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CEY-Oq-bnZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="61h-Id-Ccc"/>
+                            <constraint firstItem="hRC-1b-1lz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="7eV-VT-O1H"/>
+                            <constraint firstItem="CEY-Oq-bnZ" firstAttribute="top" secondItem="hRC-1b-1lz" secondAttribute="bottom" constant="10" id="Lcr-Uc-ssE"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CEY-Oq-bnZ" secondAttribute="trailing" constant="20" id="SsH-fv-A6t"/>
+                            <constraint firstItem="hRC-1b-1lz" firstAttribute="top" secondItem="X7W-ib-4EA" secondAttribute="bottom" constant="30" id="VV7-CV-02H"/>
+                            <constraint firstItem="X7W-ib-4EA" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="XJj-bO-8YE"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="X7W-ib-4EA" secondAttribute="bottom" constant="488" id="enC-Ra-KUE"/>
+                            <constraint firstItem="X7W-ib-4EA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="i8y-Np-Mwj"/>
+                            <constraint firstItem="X7W-ib-4EA" firstAttribute="leading" secondItem="hRC-1b-1lz" secondAttribute="leading" id="pZr-dC-71f"/>
+                            <constraint firstItem="CEY-Oq-bnZ" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="s2n-oe-w6u"/>
+                            <constraint firstItem="CEY-Oq-bnZ" firstAttribute="top" secondItem="hRC-1b-1lz" secondAttribute="bottom" constant="10" id="sR3-eA-5As"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="MyPage" id="CgF-af-3ag"/>
+                    <tabBarItem key="tabBarItem" title="MyPage" selectedImage="person.circle.fill" catalog="system" id="CgF-af-3ag"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="likedVideosCollectionView" destination="CEY-Oq-bnZ" id="Mfm-qs-2xJ"/>
+                        <outlet property="logOutButton" destination="w6u-dO-MfD" id="bfa-Qk-vv8"/>
+                        <outlet property="userEmailLabel" destination="haf-4C-ZXB" id="1Uf-Lb-WpI"/>
+                        <outlet property="userNameLabel" destination="qpo-PP-9Uf" id="Bc0-GP-IhO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="125" y="-34"/>
+            <point key="canvasLocation" x="124.42748091603053" y="-34.507042253521128"/>
         </scene>
     </scenes>
     <resources>
+        <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
