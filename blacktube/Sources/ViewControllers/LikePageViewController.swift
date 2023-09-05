@@ -53,15 +53,15 @@ class LikePageViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
-    let dummyVideos: [Video] = [
-        Video(
+    let dummyVideos: [Video2] = [
+        Video2(
             title: "Sample Video 1",
             thumbnailURL: URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg")!,
             viewCount: "1M",
             channelTitle: "Channel A",
             channelIconURL: URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg")!
         ),
-        Video(
+        Video2(
             title: "Sample Video 2",
             thumbnailURL: URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg")!,
             viewCount: "2M",
@@ -79,7 +79,7 @@ class CustomVideoCell: UITableViewCell {
     
 }
 
-struct Video {
+struct Video2 {
     let title: String
     let thumbnailURL: URL
     let viewCount: String
