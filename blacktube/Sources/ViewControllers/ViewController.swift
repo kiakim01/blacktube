@@ -42,15 +42,14 @@ class ViewController: UIViewController {
                    let thumbnails = snippet["thumbnails"] as? [String: Any],
                    let standardThumbnail = thumbnails["standard"] as? [String: Any],
                    let thumbnailURL = URL(string: standardThumbnail["url"] as! String),
-                   let title = snippet["title"] as? String,
-                   let publishedAt = snippet["publishedAt"] as? String {
+                   let title = snippet["title"] as? String {
                     
                     let video = Video(
                         title: title,
                         thumbnailURL: thumbnailURL,
-                        publishedAt: publishedAt,
                         viewCount: viewCount,
-                        channelTitle: channelTitle
+                        channelTitle: channelTitle,
+                        item: item
                     )
                     self.videos.append(video)
                 }
@@ -76,20 +75,6 @@ extension ViewController: UITableViewDataSource {
         
         cell.titleLabel.text = video.title
         
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-//
-//        if let publishedAt = dateFormatter.date(from: video.publishedAt) {
-//            dateFormatter.dateFormat = "yyyy-MM-dd"
-//            let formattedDate = dateFormatter.string(from: publishedAt)
-//
-//            cell.publishLabel.text = formattedDate
-//        } else {
-//            cell.publishLabel.text = video.publishedAt
-//        }
-        
-        cell.publishLabel.text = ""
-        
         if let viewCountInt = Int(video.viewCount) {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
@@ -101,6 +86,11 @@ extension ViewController: UITableViewDataSource {
         
         cell.channelLabel.text = "\(video.channelTitle)  ·"
         cell.channelLabel.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        
+        cell.heartButton.isSelected = false
+        cell.heartButton.tintColor = .clear
+        let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
+        cell.heartButton.setImage(heart, for: .normal)
         
         DispatchQueue.global().async {
             if let imageData = try? Data(contentsOf: video.thumbnailURL) {
@@ -117,18 +107,17 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let selectedVideo = videos[indexPath.row]
-//
-//        performSegue(withIdentifier: "", sender: selectedVideo)
+        let selectedVideo = videos[indexPath.row]
+        performSegue(withIdentifier: "MainToDetail", sender: selectedVideo)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "" {
-//            if let exampleVC = segue.destination as? ExampleViewController {
-//                if let selectedVideo = sender as? Video {
-//                    exampleVC.selectedVido = selectedVideo
-//                }
-//            }
-//        }
+        if segue.identifier == "MainToDetail" {
+            if let detailVC = segue.destination as? DetailViewController {
+                if let selectedVideo = sender as? Video {
+                    detailVC.video = selectedVideo
+                }
+            }
+        }
     }
 }
