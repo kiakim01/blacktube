@@ -33,6 +33,7 @@ class LikePageViewController: UIViewController, UITableViewDataSource, UITableVi
         let video = videos[indexPath.row]
         cell.titleLabel.text = video.title
         cell.channelLabel.text = video.channelTitle
+        cell.viewCountLabel.text = "조회수 \(video.viewCount)"
 
         URLSession.shared.dataTask(with: video.thumbnailURL) { data, _, _ in
             if let data = data, let image = UIImage(data: data) {
@@ -76,6 +77,7 @@ class CustomVideoCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var channelLabel: UILabel!
     @IBOutlet weak var channelIconImageView: UIImageView!
+    @IBOutlet weak var viewCountLabel: UILabel!
     
 }
 
