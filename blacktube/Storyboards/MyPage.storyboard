@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,43 +19,60 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="X7W-ib-4EA">
-                                <rect key="frame" x="20" y="89" width="353" height="192"/>
+                                <rect key="frame" x="20" y="89" width="353" height="150"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A3j-VU-vyc">
-                                        <rect key="frame" x="0.0" y="0.0" width="169" height="192"/>
-                                    </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pEV-pP-T6l">
-                                        <rect key="frame" x="184" y="0.0" width="169" height="192"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="2m6-g7-l2C">
+                                        <rect key="frame" x="0.0" y="0.0" width="169" height="150"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpo-PP-9Uf">
-                                                <rect key="frame" x="0.0" y="0.0" width="169" height="20.333333333333332"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A3j-VU-vyc">
+                                                <rect key="frame" x="9.6666666666666714" y="0.0" width="150" height="150"/>
+                                                <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="ajm-qf-KqV"/>
+                                                    <constraint firstAttribute="height" constant="150" id="jzX-qm-A9H"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="pEV-pP-T6l">
+                                        <rect key="frame" x="184" y="0.0" width="169" height="150"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유저명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpo-PP-9Uf">
+                                                <rect key="frame" x="20.000000000000004" y="15" width="44.333333333333343" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haf-4C-ZXB">
-                                                <rect key="frame" x="0.0" y="79" width="169" height="20.333333333333329"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유저이메일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haf-4C-ZXB">
+                                                <rect key="frame" x="20" y="45" width="73.666666666666671" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6u-dO-MfD">
-                                                <rect key="frame" x="0.0" y="157.66666666666666" width="169" height="34.333333333333343"/>
+                                                <rect key="frame" x="20" y="105" width="83" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="eiR-X6-3Lj"/>
+                                                </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="로그아웃"/>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="haf-4C-ZXB" firstAttribute="centerY" secondItem="pEV-pP-T6l" secondAttribute="centerY" id="Tdz-Ki-zju"/>
+                                        </constraints>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="15" leading="20" bottom="15" trailing="8"/>
                                     </stackView>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내가 좋아요 한 영상" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRC-1b-1lz">
-                                <rect key="frame" x="20" y="311" width="131" height="20.333333333333314"/>
+                                <rect key="frame" x="20" y="319" width="131" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CEY-Oq-bnZ">
-                                <rect key="frame" x="20" y="341.33333333333326" width="353" height="427.66666666666674"/>
+                                <rect key="frame" x="20" y="359.33333333333326" width="353" height="409.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tuu-rQ-DXn">
                                     <size key="itemSize" width="128" height="128"/>
@@ -72,7 +88,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -80,17 +96,16 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="hRC-1b-1lz" firstAttribute="top" secondItem="X7W-ib-4EA" secondAttribute="bottom" constant="80" id="2jR-R7-P2F"/>
                             <constraint firstItem="CEY-Oq-bnZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="61h-Id-Ccc"/>
-                            <constraint firstItem="hRC-1b-1lz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="7eV-VT-O1H"/>
-                            <constraint firstItem="CEY-Oq-bnZ" firstAttribute="top" secondItem="hRC-1b-1lz" secondAttribute="bottom" constant="10" id="Lcr-Uc-ssE"/>
+                            <constraint firstItem="X7W-ib-4EA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="El5-KT-623"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="X7W-ib-4EA" secondAttribute="trailing" constant="20" id="Mba-hZ-jTu"/>
+                            <constraint firstItem="hRC-1b-1lz" firstAttribute="leading" secondItem="X7W-ib-4EA" secondAttribute="leading" id="NO4-6a-MsZ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CEY-Oq-bnZ" secondAttribute="trailing" constant="20" id="SsH-fv-A6t"/>
-                            <constraint firstItem="hRC-1b-1lz" firstAttribute="top" secondItem="X7W-ib-4EA" secondAttribute="bottom" constant="30" id="VV7-CV-02H"/>
-                            <constraint firstItem="X7W-ib-4EA" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="XJj-bO-8YE"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="X7W-ib-4EA" secondAttribute="bottom" constant="488" id="enC-Ra-KUE"/>
-                            <constraint firstItem="X7W-ib-4EA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="i8y-Np-Mwj"/>
-                            <constraint firstItem="X7W-ib-4EA" firstAttribute="leading" secondItem="hRC-1b-1lz" secondAttribute="leading" id="pZr-dC-71f"/>
-                            <constraint firstItem="CEY-Oq-bnZ" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="s2n-oe-w6u"/>
-                            <constraint firstItem="CEY-Oq-bnZ" firstAttribute="top" secondItem="hRC-1b-1lz" secondAttribute="bottom" constant="10" id="sR3-eA-5As"/>
+                            <constraint firstItem="hRC-1b-1lz" firstAttribute="leading" secondItem="CEY-Oq-bnZ" secondAttribute="leading" id="ZsI-1l-cA7"/>
+                            <constraint firstItem="CEY-Oq-bnZ" firstAttribute="top" secondItem="hRC-1b-1lz" secondAttribute="bottom" constant="20" id="l6J-jW-PJi"/>
+                            <constraint firstItem="CEY-Oq-bnZ" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="lzB-Lm-sQZ"/>
+                            <constraint firstItem="X7W-ib-4EA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="o0o-fi-kAQ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="MyPage" selectedImage="person.circle.fill" catalog="system" id="CgF-af-3ag"/>
@@ -99,6 +114,7 @@
                         <outlet property="likedVideosCollectionView" destination="CEY-Oq-bnZ" id="Mfm-qs-2xJ"/>
                         <outlet property="logOutButton" destination="w6u-dO-MfD" id="bfa-Qk-vv8"/>
                         <outlet property="userEmailLabel" destination="haf-4C-ZXB" id="1Uf-Lb-WpI"/>
+                        <outlet property="userImage" destination="A3j-VU-vyc" id="1GF-o6-aPo"/>
                         <outlet property="userNameLabel" destination="qpo-PP-9Uf" id="Bc0-GP-IhO"/>
                     </connections>
                 </viewController>
@@ -111,6 +127,9 @@
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

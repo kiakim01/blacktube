@@ -11,6 +11,8 @@ class MyPageViewController: UIViewController {
     
     // MARK: - Properties
     
+    
+    @IBOutlet var userImage: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var userEmailLabel: UILabel!
     @IBOutlet var logOutButton: UIButton!
@@ -21,11 +23,16 @@ class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        configureUI()
         likedVideosCollectionView.delegate = self
         likedVideosCollectionView.dataSource = self
     }
-
+    // MARK: - UI
+    func configureUI() {
+        userImage.backgroundColor = .lightGray
+        userImage.layer.masksToBounds = true
+        userImage.layer.cornerRadius = userImage.frame.width / 2
+    }
 
 }
 
