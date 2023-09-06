@@ -8,15 +8,15 @@
 import UIKit
 
 class LikedVideosCollectionViewCell: UICollectionViewCell {
-    
+
     // MARK: - Properties
-    
+
     @IBOutlet var thumbnailImage: UIImageView!
-    
+
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var channelLabel: UILabel!
     @IBOutlet var viewCountLabel: UILabel!
-    
+
     // MARK: - Methods
     
     func configure(_ video: Video) {
@@ -28,12 +28,12 @@ class LikedVideosCollectionViewCell: UICollectionViewCell {
                 }
             }
         }.resume()
-        
+
         titleLabel.text = video.title
         channelLabel.text = video.channelTitle
         viewCountLabel.text = "\(video.viewCount) views"
     }
-   
+
 }
 
 
