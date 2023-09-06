@@ -34,22 +34,20 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let videoID = video?.item["id"] as! String
+        let videoID = video?.videoId
         SetupUI()
-        LoadVideo(videoID)
+        LoadVideo(videoID!)
     }
     
     // 영상의 타이틀, 채널명, 조회수, 설명란을 로드하는 함수
     func SetupUI () {
         
-        let snippet = video?.item["snippet"] as! [String : Any]
-        let statistics = video?.item["statistics"] as? [String: Any]
-        let viewCount = statistics?["viewCount"] as? String
-        let tags = snippet["tags"] as? [String]
-        var publishedDate = snippet["publishedAt"] as! String
-        let startIndex = publishedDate.index(publishedDate.startIndex, offsetBy: 0)
-        let endIndex = publishedDate.index(publishedDate.startIndex, offsetBy: 9)
-        publishedDate = String(publishedDate[startIndex...endIndex])
+        let viewCount = video?.viewCount
+        let tags = video?.tags
+        var publishedDate = video?.publishedDate
+        let startIndex = publishedDate!.index(publishedDate!.startIndex, offsetBy: 0)
+        let endIndex = publishedDate!.index(publishedDate!.startIndex, offsetBy: 9)
+        publishedDate = String(publishedDate![startIndex...endIndex])
         
         
         let formatter = NumberFormatter()
@@ -74,8 +72,8 @@ class DetailViewController: UIViewController {
         
 
         tagLabel.text = tagText
-        videoDate.text = "Uploaded at " + publishedDate
-        videoDescription.text = snippet["description"] as? String
+        videoDate.text = "Uploaded at " + publishedDate!
+        videoDescription.text = video?.description
         likeButton.tintColor = .red
         
         // 일반배열
