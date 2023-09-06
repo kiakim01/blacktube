@@ -58,8 +58,13 @@ class DetailViewController: UIViewController {
         channelLabel.text = (video?.channelTitle)! + "  ·"
         var tagText = ""
         if tags != nil {
+            var tagArray: [String] = []
             for tag in tags! {
+                tagArray.append("#\(tag) ")
                 tagText += "#\(tag) "
+                if tagArray.count == 5 {
+                    break
+                }
             }
         }
 
