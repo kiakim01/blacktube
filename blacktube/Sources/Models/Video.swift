@@ -21,6 +21,7 @@ struct Video: Equatable, Codable {
     let publishedDate: String
     let videoId: String
     let description: String
+    var isLiked: Bool
 }
 
 var likedVideos: [Video] = []

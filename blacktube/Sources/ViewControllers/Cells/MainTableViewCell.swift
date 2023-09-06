@@ -21,14 +21,16 @@ class MainTableViewCell: UITableViewCell {
         // tableView.indexPath를 이용하기 위해 메서드 ViewController에 구현
         delegate?.heartButtonTapped(for: self)
         
-        if sender.isSelected {
-            sender.isSelected = false
-            let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
-            sender.setImage(heart, for: .normal)
-        } else {
-            sender.isSelected = true
+        let index = sender.tag
+        
+        videos[index].isLiked.toggle()
+        
+        if videos[index].isLiked {
             let filledHeart = UIImage(systemName: "heart.fill")?.imageWithColor(color: UIColor.red)
             sender.setImage(filledHeart, for: .normal)
+        } else {
+            let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
+            sender.setImage(heart, for: .normal)
         }
     }
     
