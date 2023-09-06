@@ -19,7 +19,7 @@ class LikedVideosCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Methods
     
-    func configure(_ video: Video2) {
+    func configure(_ video: Video) {
     
         URLSession.shared.dataTask(with: video.thumbnailURL) { data, _, _ in
             if let data = data, let image = UIImage(data: data) {

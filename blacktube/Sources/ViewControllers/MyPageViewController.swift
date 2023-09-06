@@ -11,22 +11,7 @@ class MyPageViewController: UIViewController {
     
     // MARK: - Properties
     
-    var likedVideos: [Video2] = [
-        Video2(
-            title: "Sample Video 1",
-            thumbnailURL: URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg")!,
-            viewCount: "1M",
-            channelTitle: "Channel A",
-            channelIconURL: URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg")!
-        ),
-        Video2(
-            title: "Sample Video 2",
-            thumbnailURL: URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg")!,
-            viewCount: "2M",
-            channelTitle: "Channel B",
-            channelIconURL: URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg")!
-        ),
-    ]
+    
     
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
@@ -44,7 +29,16 @@ class MyPageViewController: UIViewController {
         configureUI()
         likedVideosCollectionView.delegate = self
         likedVideosCollectionView.dataSource = self
+        
+        print("likedVideos 수 : ",likedVideos.count)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        likedVideosCollectionView.reloadData()
+    }
+    
     // MARK: - UI
     func configureUI() {
         userImage.backgroundColor = .lightGray
@@ -72,6 +66,7 @@ extension MyPageViewController: UICollectionViewDataSource {
         // 셀에 데이터를 설정
         cell.configure(video)
         
+        
         return cell
     }
     
@@ -80,4 +75,20 @@ extension MyPageViewController: UICollectionViewDataSource {
 
 extension MyPageViewController: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let selectedVideo = likedVideos[indexPath.item] // selectedVideo : 선택한 셀의 데이터
+        print("22 : ", selectedVideo)
+        performSegue(withIdentifier: "likedVideoCell", sender: selectedVideo) // Segue실행, 화면전환
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "likedVideoCell" {
+            if let detailVC = segue.destination as? DetailViewController {
+                if let selectedVideo = sender as? Video {
+                    detailVC.video = selectedVideo // 선택한 비디오 데이터를 detailViewController에 전달
+                }
+            }
+        }
+    }
 }
