@@ -10,9 +10,7 @@ import UIKit
 class MyPageViewController: UIViewController {
     
     // MARK: - Properties
-    
-    
-    
+
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var userEmailLabel: UILabel!
@@ -35,9 +33,6 @@ class MyPageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        if let aaa = likedVideos.first {
-            print("11111 MyPageVC에 들어오는 원본 ", aaa)
-        }
         likedVideosCollectionView.reloadData()
     }
     
@@ -62,7 +57,6 @@ extension MyPageViewController: UICollectionViewDataSource {
         cell.layer.cornerRadius = 10
         
         let video = likedVideos[indexPath.item]
-        print("22222 셀에 들어가는 값:", likedVideos[indexPath.item])
         cell.configure(video)
         
         
@@ -73,18 +67,9 @@ extension MyPageViewController: UICollectionViewDataSource {
 
 extension MyPageViewController: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let selectedVideo = likedVideos[indexPath.item] // selectedVideo : 선택한 셀의 데이터
-        print("33333 sender에 들어가는 값 ", likedVideos[indexPath.item])
-        performSegue(withIdentifier: "likedVideoCell", sender: selectedVideo) // Segue실행, 화면전환
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "likedVideoCell" {
-            if let detailVC = segue.destination as? DetailViewController, let selectedVideo = sender as? Video {
-                detailVC.video = selectedVideo
-            }
+        if segue.identifier == "likedVideoCell", let detailVC = segue.destination as? DetailViewController, let selectedIndexPath = likedVideosCollectionView.indexPathsForSelectedItems?.first {
+            detailVC.video = likedVideos[selectedIndexPath.item]
         }
     }
 }
