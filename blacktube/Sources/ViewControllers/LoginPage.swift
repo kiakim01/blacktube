@@ -68,7 +68,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(UIColor.gray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        return button
+      return button
     }()
     
     let LoginButton : UIButton = {
@@ -85,6 +85,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         setLayout()
     }
     
+
     
 }
 
@@ -100,6 +101,10 @@ extension LoginPage{
         UserInfotableView.separatorStyle = .none
         self.view.addSubview(LoginButton)
         self.view.addSubview(goToSignUpButton)
+      
+        
+        
+      
     
     }
     

@@ -7,41 +7,32 @@
 
 import UIKit
 
-class SignUpPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+
+
+class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     struct SignUpList {
+        let id : Int
         let title: String
         let placeHolder: String
+        let condition: String
+        var pass : Bool
+        var inputValue : String
+        let celltype : Celltype
+        
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SignUpCustomCell", for:indexPath)
-            as! SignUpCustomCell
-        
-        let signUpList = data[indexPath.row]
-        cell.titleLabel.text = signUpList.title
-        cell.userInput.placeholder = signUpList.placeHolder
-        
-//        cell.checkIcon.isHidden =true
-        
-        return cell
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-    
-    let data:[SignUpList] = [
-       SignUpList(title: "ID", placeHolder: "ID를 입력해주세요"),
-       SignUpList(title: "Password", placeHolder: "비밀번호를 입력해주세요"),
-       SignUpList(title: "Password\ncheck", placeHolder: "비밀번호를 다시 입력해주세요"),
-       SignUpList(title: "Name", placeHolder: "이름을 입력해주세요"),
-       SignUpList(title: "E-mail", placeHolder: "이메일을 입력해주세요")
-       
+    var data:[SignUpList] = [
+        SignUpList(id:0, title: "ID", placeHolder: "ID를 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", celltype: .id),
+        SignUpList(id:1,title: "Password", placeHolder: "비밀번호를 입력해주세요", condition:"^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", celltype: .password),
+        SignUpList(id:2,title: "Password\ncheck", placeHolder: "비밀번호를 다시 입력해주세요", condition: "^[a-zA-Z0-9]{8,16}$",pass: false ,inputValue:"", celltype: .password),
+        SignUpList(id:3,title: "Name", placeHolder: "이름을 입력해주   세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", celltype: .name ),
+        SignUpList(id:4,title: "E-mail", placeHolder: "이메일을 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false ,inputValue:"", celltype: .email)
     ]
+    
+    
+    
     
     let InfoLabel : UILabel = {
         let label = UILabel()
@@ -81,12 +72,6 @@ class SignUpPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         setLayout()
     }
     
-    
-}
-
-
-
-extension SignUpPage{
     func configureUI(){
         self.view.addSubview(InfoLabel)
         self.view.addSubview(UserInfoArea)
@@ -95,6 +80,7 @@ extension SignUpPage{
         UserInfotableView.dataSource = self
         UserInfotableView.separatorStyle = .none
         self.view.addSubview(signUpButton)
+        signUpButton.addTarget(self, action: #selector(submitInput), for: .touchUpInside)
         
     }
     
@@ -109,7 +95,7 @@ extension SignUpPage{
                                      UserInfoArea.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10),
                                      UserInfoArea.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -10),
                                      UserInfoArea.bottomAnchor.constraint(equalTo: signUpButton.topAnchor,constant: -20)
-    
+                                     
                                     ])
         UserInfotableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -125,7 +111,154 @@ extension SignUpPage{
                                      signUpButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
                                      signUpButton.heightAnchor.constraint(equalToConstant: 70)
                                     ])
-      
-
     }
+    
+}
+
+//MARK: Method
+extension SignUpPage{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SignUpCustomCell", for:indexPath)
+        as! SignUpCustomCell
+        
+        
+        let signUpList = data[indexPath.row]
+        
+        
+        
+        //[Ho]
+        //        cell.celltype = signUpList.celltype
+        
+        cell.titleLabel.text = signUpList.title
+        cell.userInput.placeholder = signUpList.placeHolder
+        
+        cell.userInput.addTarget(self, action: #selector(checkValue), for: .editingChanged)
+        cell.userInput.tag = indexPath.row
+        cell.checkIcon.isHidden = true
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
+  
+    @objc func checkValue(_ sender: UITextField, forCell cell:SignUpCustomCell) {
+        //해당 row에 있는 cell 자체를 가져오는작업 .. !
+        //        let cell = UserInfotableView.cellForRow(at: IndexPath(row: sender.tag, section: 0))
+        
+        
+        
+        //[하고싶은 동작] : inputText와 condition를 비교 후 일치하면,
+        // 1.cell의 UI 변경 checkIcon.isHidden = false
+        // 2.data의 변경 : SignUpList.pass = true
+        // 3.data의 변경 : inputValue = inputText.text
+        
+        //A.cell.userInput.text
+        let text = sender.text
+        //B.SignUpList의 데이터
+        //        let condition = data[sender.tag].condition
+        //C.checkIcon [조정 checkIcon]_1
+        let cell = cell
+        //        let icon = cell.checkIcon
+        
+        
+        let inputValue = data[sender.tag].inputValue
+        
+        let spellCount = text?.count
+        
+        if spellCount ?? 0 >= 5 {
+            
+            data[sender.tag].inputValue = text ?? ""
+            data[sender.tag].pass = true
+            
+            print("[ID:\(data[sender.tag].id)],[title:\(data[sender.tag].title)],[pass:\(data[sender.tag].pass)],[inputValue:\(data[sender.tag].inputValue)]")
+            
+        }else {
+            //알럿 : 내용을 다시 확인해주세요
+            
+        }
+        
+        
+        
+    }
+    
+    
+    @objc func submitInput(){
+        
+        //     [하고싶은 동작] SignUpList.pass의 모든 값이 ture 일때,
+        //      1. SignUpList.inputValue에 각 데이터를 저장
+        //      2. UserDefaluts저장 & customCell ("SignUpList.title값 활용")
+        
+        
+        //[Ho]
+        //        data[0].inputValue //id
+        //        data[1].inputValue //password
+        //        data[3].inputValue //name
+        //        data[4].inputValue //email
+        //
+        //
+        //        switch data[0].celltype {
+        //
+        //
+        //        case .id:
+        //            UserDefaults.standard.set(data[0].inputValue, forKey: "id")
+        //        case .password:
+        //            UserDefaults.standard.set(data[1].inputValue, forKey: "password")
+        //        case .name:
+        //            UserDefaults.standard.set(data[3].inputValue, forKey: "name")
+        //        case .email:
+        //            UserDefaults.standard.set(data[4].inputValue, forKey: "email")
+        //        }
+        //
+        //        switch data[1].celltype {
+        //            //
+        //
+        //        case .id:
+        //            UserDefaults.standard.set(data[0].inputValue, forKey: "id")
+        //        case .password:
+        //            UserDefaults.standard.set(data[1].inputValue, forKey: "password")
+        //        case .name:
+        //            UserDefaults.standard.set(data[3].inputValue, forKey: "name")
+        //        case .email:
+        //            UserDefaults.standard.set(data[4].inputValue, forKey: "email")
+        //        }
+        //
+        //        switch data[3].celltype {
+        //
+        //        case .id:
+        //            UserDefaults.standard.set(data[0].inputValue, forKey: "id")
+        //        case .password:
+        //            UserDefaults.standard.set(data[1].inputValue, forKey: "password")
+        //        case .name:
+        //            UserDefaults.standard.set(data[3].inputValue, forKey: "name")
+        //        case .email:
+        //            UserDefaults.standard.set(data[4].inputValue, forKey: "email")
+        //        }
+        //
+        //        switch data[4].celltype {
+        //        case .id:
+        //            UserDefaults.standard.set(data[0].inputValue, forKey: "id")
+        //        case .password:
+        //            UserDefaults.standard.set(data[1].inputValue, forKey: "password")
+        //        case .name:
+        //            UserDefaults.standard.set(data[3].inputValue, forKey: "name")
+        //        case .email:
+        //            UserDefaults.standard.set(data[4].inputValue, forKey: "email")
+        //        }
+        
+        // Assuming you have populated the `userData` array with `UserData` objects
+        
+        
+        
+    }
+    
+    
+    
+    
+    
 }
