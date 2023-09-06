@@ -15,13 +15,22 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var channelLabel: UILabel!
     @IBOutlet weak var heartButton: UIButton!
     
-    weak var delegate: MainTableViewCellDelegate?
-    
     @IBAction func heartButtonTapped(_ sender: UIButton) {
-        // tableView.indexPath를 이용하기 위해 메서드 ViewController에 구현
-        delegate?.heartButtonTapped(for: self)
         
         let index = sender.tag
+        let video = videos[index]
+        
+        if !likedVideos.contains(video) {
+            likedVideos.append(video)
+        }
+        else {
+            for i in 0..<likedVideos.count {
+                if likedVideos[i] == video {
+                    likedVideos.remove(at: i)
+                    break
+                }
+            }
+        }
         
         videos[index].isLiked.toggle()
         

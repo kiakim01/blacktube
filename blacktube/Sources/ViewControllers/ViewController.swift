@@ -78,8 +78,6 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainTableViewCell
         
-        cell.delegate = self
-        
         let video = videos[indexPath.row]
         
         cell.titleLabel.text = video.title
@@ -133,25 +131,6 @@ extension ViewController: UITableViewDelegate {
             if let detailVC = segue.destination as? DetailViewController {
                 if let selectedVideo = sender as? Video {
                     detailVC.video = selectedVideo
-                }
-            }
-        }
-    }
-}
-
-extension ViewController: MainTableViewCellDelegate {
-    func heartButtonTapped(for cell: MainTableViewCell) {
-        if let indexPath = tableView.indexPath(for: cell) {
-            let video = videos[indexPath.row]
-            if !likedVideos.contains(video) {
-                likedVideos.append(video)
-            }
-            else {
-                for i in 0..<likedVideos.count {
-                    if likedVideos[i] == video {
-                        likedVideos.remove(at: i)
-                        break
-                    }
                 }
             }
         }
