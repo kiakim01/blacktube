@@ -41,6 +41,10 @@ class ViewController: UIViewController {
                    let thumbnails = snippet["thumbnails"] as? [String: Any],
                    let standardThumbnail = thumbnails["standard"] as? [String: Any],
                    let thumbnailURL = URL(string: standardThumbnail["url"] as! String),
+                   let tags = snippet["tags"] as? [String],
+                   let publishedDate = snippet["publishedAt"] as? String,
+                   let videoId = item["id"] as? String,
+                   let description = snippet["description"] as? String,
                    let title = snippet["title"] as? String {
                     
                     let video = Video(
@@ -48,7 +52,10 @@ class ViewController: UIViewController {
                         thumbnailURL: thumbnailURL,
                         viewCount: viewCount,
                         channelTitle: channelTitle,
-                        item: item
+                        tags: tags,
+                        publishedDate: publishedDate,
+                        videoId: videoId,
+                        description: description
                     )
                     videos.append(video)
                 }
