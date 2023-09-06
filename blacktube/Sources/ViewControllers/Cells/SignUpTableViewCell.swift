@@ -40,7 +40,7 @@ class  SignUpCustomCell : UITableViewCell{
     let checkIcon : UIImageView = {
         let view = UIImageView()
         view.image = UIImage(systemName: "checkmark.circle")
-        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.tintColor = UIColor.green
         return view
     }()
     
@@ -83,13 +83,31 @@ class  SignUpCustomCell : UITableViewCell{
     
     
 }
+//MARK: Methode
+extension SignUpCustomCell {
+    @objc func textFieldCheck() -> Bool{
+        if let text = userInput.text {
+            let spellCount = text.count
+            if spellCount >= 5 {
+                checkIcon.tintColor = .blue
+                print("true")
+                return true
+            }
+        }
+        checkIcon.tintColor = .red
+        print("false")
+        return false
+    }
+}
 
+
+//MARK: UI
 extension SignUpCustomCell {
     func configureUI(){
         contentView.addSubview(titleLabel)
         contentView.addSubview(userInput)
         contentView.addSubview(checkIcon)
-//        contentView.backgroundColor = UIColor.green
+        userInput.addTarget(self, action: #selector(textFieldCheck), for: .editingChanged)
         
     }
     func setLayout(){
