@@ -55,7 +55,8 @@ class ViewController: UIViewController {
                         tags: tags,
                         publishedDate: publishedDate,
                         videoId: videoId,
-                        description: description
+                        description: description,
+                        isLiked: false
                     )
                     videos.append(video)
                 }
@@ -97,8 +98,16 @@ extension ViewController: UITableViewDataSource {
         
         cell.heartButton.isSelected = false
         cell.heartButton.tintColor = .clear
-        let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
-        cell.heartButton.setImage(heart, for: .normal)
+        
+        if video.isLiked {
+            let filledHeart = UIImage(systemName: "heart.fill")?.imageWithColor(color: UIColor.red)
+            cell.heartButton.setImage(filledHeart, for: .normal)
+        } else {
+            let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
+            cell.heartButton.setImage(heart, for: .normal)
+        }
+        
+        cell.heartButton.tag = indexPath.row
         
         DispatchQueue.global().async {
             if let imageData = try? Data(contentsOf: video.thumbnailURL) {
