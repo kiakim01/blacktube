@@ -11,11 +11,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var videos: [Video] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        videos = []
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -51,7 +50,7 @@ class ViewController: UIViewController {
                         channelTitle: channelTitle,
                         item: item
                     )
-                    self.videos.append(video)
+                    videos.append(video)
                 }
             }
             

@@ -20,3 +20,4 @@ struct Video: Equatable {
 }
 
 var likedVideos: [Video] = []
+var videos: [Video] = []
