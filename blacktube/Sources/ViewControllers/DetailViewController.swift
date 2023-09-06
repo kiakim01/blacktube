@@ -24,7 +24,13 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var videoDate: UILabel!
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var viewMoreButton: UIButton!
     
+    @IBAction func ViewMore(_ sender: Any) {
+        viewMoreButton.isHidden = true
+        tagLabel.numberOfLines = 0
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,15 +64,14 @@ class DetailViewController: UIViewController {
         channelLabel.text = (video?.channelTitle)! + "  ·"
         var tagText = ""
         if tags != nil {
-            var tagArray: [String] = []
             for tag in tags! {
-                tagArray.append("#\(tag) ")
                 tagText += "#\(tag) "
-                if tagArray.count == 5 {
-                    break
-                }
             }
         }
+        else {
+            viewMoreButton.isHidden = true
+        }
+        
 
         tagLabel.text = tagText
         videoDate.text = "Uploaded at " + publishedDate
