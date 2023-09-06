@@ -27,7 +27,7 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PNN-9n-sGk">
-                                <rect key="frame" x="0.0" y="382" width="393" height="101"/>
+                                <rect key="frame" x="0.0" y="382" width="393" height="114"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5y-lk-drH">
                                         <rect key="frame" x="0.0" y="0.0" width="33" height="20.333333333333332"/>
@@ -63,16 +63,34 @@
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# tag" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDF-X8-yI3">
-                                        <rect key="frame" x="0.0" y="86.666666666666686" width="29.333333333333332" height="14.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" name="AccentColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79A-RW-V8b">
+                                        <rect key="frame" x="0.0" y="86.666666666666686" width="84.666666666666671" height="27.333333333333329"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# tag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDF-X8-yI3">
+                                                <rect key="frame" x="0.0" y="0.0" width="29.333333333333332" height="27.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" name="AccentColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4L-uE-OXQ">
+                                                <rect key="frame" x="29.333333333333332" y="0.0" width="55.333333333333343" height="27.333333333333332"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="더보기">
+                                                    <fontDescription key="titleFontDescription" name=".AppleSDGothicNeoI-Regular" family=".Apple SD Gothic NeoI" pointSize="12"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ViewMore:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="s5C-1u-y2G"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="B4L-uE-OXQ" secondAttribute="trailing" id="hzY-V4-2gX"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8bx-vW-Fe8">
-                                <rect key="frame" x="0.0" y="483" width="393" height="308"/>
+                                <rect key="frame" x="0.0" y="496" width="393" height="295"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -105,6 +123,7 @@
                         <outlet property="videoDescription" destination="8bx-vW-Fe8" id="YfW-bm-HSd"/>
                         <outlet property="videoView" destination="ezi-pG-cuN" id="6qQ-tH-udj"/>
                         <outlet property="viewCountLabel" destination="xpc-84-Tp1" id="Wgd-HD-bgm"/>
+                        <outlet property="viewMoreButton" destination="B4L-uE-OXQ" id="zUH-O9-UR0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
