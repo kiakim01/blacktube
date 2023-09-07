@@ -11,6 +11,7 @@ class SearchPage: UIViewController {
     
     @IBOutlet weak var searchTableView: UITableView!
     var searchVideos: [Video] = []
+    var searchIndex: [Int] = []
     
     let searchBox : UIStackView = {
         let stackView = UIStackView()
@@ -72,6 +73,10 @@ class SearchPage: UIViewController {
         setLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        searchTableView.reloadData()
+    }
+    
 }
 
 extension SearchPage{
@@ -129,9 +134,11 @@ extension SearchPage: UITableViewDelegate, UITableViewDataSource {
     @objc func SearchItem(_ sender:UITextField) {
         let key = sender.text ?? ""
         searchVideos = []
-        for video in videos {
-            if video.title.lowercased().contains(key.lowercased()) {
-                searchVideos.append(video)
+        searchIndex = []
+        for i in 0..<videos.count {
+            if videos[i].title.lowercased().contains(key.lowercased()) {
+                searchVideos.append(videos[i])
+                searchIndex.append(i)
             }
         }
         self.searchTableView.reloadData()
@@ -142,38 +149,46 @@ extension SearchPage: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
-        let video = searchVideos[indexPath.row]
-        
-        cell.titleLabel.text = video.title
-        
-        if let viewCountInt = Int(video.viewCount) {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            if let formattedViewCount = formatter.string(from: NSNumber(value:viewCountInt)) {
-                cell.viewCountLabel.text = "\(formattedViewCount) views"
-                cell.viewCountLabel.font = UIFont.systemFont(ofSize: 12,weight: .thin)
-            }
-        }
-        
-        cell.channelLabel.text = "\(video.channelTitle)  ·"
-        cell.channelLabel.font = UIFont.systemFont(ofSize: 12, weight: .thin)
-        
-        cell.heartButton.isSelected = false
-        cell.heartButton.tintColor = .clear
-        let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
-        cell.heartButton.setImage(heart, for: .normal)
-        
-        DispatchQueue.global().async {
-            if let imageData = try? Data(contentsOf: video.thumbnailURL) {
-                let image = UIImage(data: imageData)
-                DispatchQueue.main.async {
-                    cell.thumbnailView.image = image
-                }
-            }
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
+        let video = videos[searchIndex[indexPath.row]]
+        cell.heartButton.tag = searchIndex[indexPath.row]
+        cell.SetupUI(video)
+        cell.heartButton.addTarget(self, action: #selector(ClickButton), for: .touchUpInside)
         return cell
     }
     
+    @objc func ClickButton (_ sender: UIButton) {
+        let video = videos[sender.tag]
+        if !likedVideos.contains(video) {
+            likedVideos.append(video)
+            sender.tintColor = .red
+            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+        else {
+            for i in 0..<likedVideos.count {
+                if likedVideos[i] == video {
+                    likedVideos.remove(at: i)
+                    break
+                }
+            }
+            sender.tintColor = .gray
+            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        videos[sender.tag].isLiked.toggle()
+    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedVideo = searchVideos[indexPath.row]
+        performSegue(withIdentifier: "SearchToDetail", sender: selectedVideo)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SearchToDetail" {
+            if let detailVC = segue.destination as? DetailViewController {
+                if let selectedVideo = sender as? Video {
+                    detailVC.video = selectedVideo
+                }
+            }
+        }
+    }
 }

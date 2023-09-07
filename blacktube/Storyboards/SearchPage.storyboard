@@ -22,7 +22,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainCell" rowHeight="297" id="9h8-Ta-CZ5" customClass="MainTableViewCell" customModule="blacktube" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="297" id="9h8-Ta-CZ5" customClass="SearchTableViewCell" customModule="blacktube" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="297"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9h8-Ta-CZ5" id="tbg-ry-glm">
@@ -63,9 +63,6 @@
                                                                     <rect key="frame" x="329.66666666666669" y="0.0" width="43.333333333333314" height="28"/>
                                                                     <state key="normal" title="Button"/>
                                                                     <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" buttonSize="small"/>
-                                                                    <connections>
-                                                                        <action selector="heartButtonTapped:" destination="9h8-Ta-CZ5" eventType="touchUpInside" id="1my-XU-4IX"/>
-                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
@@ -82,11 +79,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="channelLabel" destination="EdR-Ld-FmN" id="vIw-ak-DnG"/>
-                                            <outlet property="heartButton" destination="Gh4-Le-c8k" id="wTr-2c-zuK"/>
-                                            <outlet property="thumbnailView" destination="WdI-NN-kBX" id="BI1-7z-VVE"/>
-                                            <outlet property="titleLabel" destination="ilx-WA-hoR" id="cMM-UW-FHJ"/>
-                                            <outlet property="viewCountLabel" destination="DmZ-sR-ViR" id="3cZ-JU-w64"/>
+                                            <outlet property="channelLabel" destination="EdR-Ld-FmN" id="NvW-Hb-8EI"/>
+                                            <outlet property="heartButton" destination="Gh4-Le-c8k" id="i6D-a5-dLf"/>
+                                            <outlet property="thumbnailView" destination="WdI-NN-kBX" id="8FH-Rw-fej"/>
+                                            <outlet property="titleLabel" destination="ilx-WA-hoR" id="46A-SN-9pl"/>
+                                            <outlet property="viewCountLabel" destination="DmZ-sR-ViR" id="Y3B-Dj-rqs"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -103,11 +100,22 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchTableView" destination="TUX-13-XvR" id="wJw-cb-grn"/>
+                        <segue destination="1bg-dw-q44" kind="show" identifier="SearchToDetail" id="8HW-vF-W3o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="124.42748091603053" y="-34.507042253521128"/>
+        </scene>
+        <!--DetailPage-->
+        <scene sceneID="ROF-zo-H1o">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DetailPage" id="1bg-dw-q44" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="y1C-98-04V"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yej-Z3-hvi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="639" y="-276"/>
         </scene>
         <!--LoginPage-->
         <scene sceneID="Nwf-um-DQh">
