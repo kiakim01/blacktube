@@ -9,6 +9,9 @@ import UIKit
 
 class SearchPage: UIViewController {
     
+    @IBOutlet weak var searchTableView: UITableView!
+    var searchVideos: [Video] = []
+    
     let searchBox : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -39,10 +42,11 @@ class SearchPage: UIViewController {
         let placeholderPadding = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = placeholderPadding
         textField.leftViewMode = .always
-        
+        textField.addTarget(self, action: #selector(SearchItem), for: .editingChanged)
         
         return textField
     }()
+    
     
     let micBox : UIView = {
         let micBox = UIView()
@@ -118,4 +122,58 @@ extension SearchPage{
             micIcon.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
+}
+
+extension SearchPage: UITableViewDelegate, UITableViewDataSource {
+    
+    @objc func SearchItem(_ sender:UITextField) {
+        let key = sender.text ?? ""
+        searchVideos = []
+        for video in videos {
+            if video.title.lowercased().contains(key.lowercased()) {
+                searchVideos.append(video)
+            }
+        }
+        self.searchTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchVideos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
+        let video = searchVideos[indexPath.row]
+        
+        cell.titleLabel.text = video.title
+        
+        if let viewCountInt = Int(video.viewCount) {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            if let formattedViewCount = formatter.string(from: NSNumber(value:viewCountInt)) {
+                cell.viewCountLabel.text = "\(formattedViewCount) views"
+                cell.viewCountLabel.font = UIFont.systemFont(ofSize: 12,weight: .thin)
+            }
+        }
+        
+        cell.channelLabel.text = "\(video.channelTitle)  ·"
+        cell.channelLabel.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        
+        cell.heartButton.isSelected = false
+        cell.heartButton.tintColor = .clear
+        let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
+        cell.heartButton.setImage(heart, for: .normal)
+        
+        DispatchQueue.global().async {
+            if let imageData = try? Data(contentsOf: video.thumbnailURL) {
+                let image = UIImage(data: imageData)
+                DispatchQueue.main.async {
+                    cell.thumbnailView.image = image
+                }
+            }
+        }
+        return cell
+    }
+    
+    
 }
