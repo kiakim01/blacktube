@@ -9,7 +9,7 @@ import Foundation
 
 class UserData {
     
-  static let shered = UserData()
+//  static let shered = UserData()
     
     var id : String?
     var password : String?
@@ -18,8 +18,10 @@ class UserData {
     
 }
 
-//class UserManager {
-//    static let shared = UserManager() // Singleton instance
-//
-//    var userDataList: [UserData] = []
-//}
+//상훈님 코드에 첨부 ..!
+class UserManager {
+    static let shared = UserManager() // Singleton instance
+
+}
+
+

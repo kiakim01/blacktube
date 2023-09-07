@@ -195,6 +195,7 @@ extension SignUpPage{
         
         if allPass {
             //useDefalut 저장
+            //규연님 코드 참고
             for item in data {
                  UserDefaults.standard.set(item.inputValue, forKey: item.title)
             }
@@ -215,7 +216,7 @@ extension SignUpPage{
                         print("저장된 email,\(emailCheck)")
         }
         else {
-            let alert = UIAlertController(title: "다시 확인해주세요", message: "입력되지 않은 내용이 있습니다.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "확인해주세요", message: "입력되지 않은 정보가 있습니다.", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .cancel){(cancle)in}
             
             alert.addAction(confirmAction)
