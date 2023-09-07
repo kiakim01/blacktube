@@ -8,10 +8,6 @@
 import UIKit
 
 class EditProfileModalViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-    // 테스트
-    var userData: User = User(userName: "홍길동",userEmail: "gildong@gmail.com")
-    
     
     // MARK: - Properties
     
@@ -40,19 +36,19 @@ class EditProfileModalViewController: UIViewController, UIImagePickerControllerD
         profileImage.backgroundColor = .lightGray
         profileImage.layer.masksToBounds = true
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
-        userNameTextField.text = userData.userName
-        userEmailTextField.text = userData.userEmail
+//        userNameTextField.text = userData.userName
+//        userEmailTextField.text = userData.userEmail
         
         
     }
     
     private func loadDataFromUserDefaults () {
-        if let savedData = UserDefaults.standard.object(forKey: "userData") as? Data {
-            let decoder = JSONDecoder()
-            if let savedObject = try? decoder.decode(User.self, from: savedData) {
-                userData = savedObject
-            }
-        }
+//        if let savedData = UserDefaults.standard.object(forKey: "userData") as? Data {
+//            let decoder = JSONDecoder()
+//            if let savedObject = try? decoder.decode(User.self, from: savedData) {
+//                userData = savedObject
+//            }
+//        }
     }
     
     private func imageTapped() {
@@ -72,7 +68,7 @@ class EditProfileModalViewController: UIViewController, UIImagePickerControllerD
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             if let imageData = selectedImage.jpegData(compressionQuality: 0.5) {
-                userData.profileImage = imageData
+//                userData.profileImage = imageData
                 profileImage.image = selectedImage // 선택한 이미지로 프로필 이미지 업데이트
                 flagImageSave = true
             }
@@ -86,11 +82,11 @@ class EditProfileModalViewController: UIViewController, UIImagePickerControllerD
     
     
     @IBAction private func saveButtonTapped(_ sender: Any) {
-        let userData = User(
-            profileImage: userData.profileImage, // TODO: 고치기
-            userName: userNameTextField.text ?? "", // TODO: 고치기
-            userEmail: userEmailTextField.text ?? "" // TODO: 고치기
-        )
+//        let userData = User(
+//            profileImage: userData.profileImage, // TODO: 고치기
+//            userName: userNameTextField.text ?? "", // TODO: 고치기
+//            userEmail: userEmailTextField.text ?? "" // TODO: 고치기
+//        )
 
         let encoder = JSONEncoder()
         if let encodedToDoTasks = try? encoder.encode(userData) {
@@ -104,12 +100,6 @@ class EditProfileModalViewController: UIViewController, UIImagePickerControllerD
     }
 }
 
-// 테스트
-struct User: Codable {
-    var profileImage: Data?
-    var userName: String
-    var userEmail: String
-}
 
 
 
