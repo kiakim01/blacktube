@@ -23,6 +23,7 @@ class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        loadDataFromUserDefaults()
         configureUI()
         likedVideosCollectionView.delegate = self
         likedVideosCollectionView.dataSource = self
@@ -37,11 +38,24 @@ class MyPageViewController: UIViewController {
     }
     
     // MARK: - UI
+    
+    private func loadDataFromUserDefaults () {
+        if let savedData = UserDefaults.standard.object(forKey: "userData") as? Data {
+            let decoder = JSONDecoder()
+            if let savedObject = try? decoder.decode(User.self, from: savedData) {
+//                userData = savedObject
+            }
+            
+//            userImage.image = userData.profileImage
+//            userNameLabel.text = userData.userName
+//            userEmailLabel.text = userData.userName
+        }
+    }
+    
     func configureUI() {
         userImage.backgroundColor = .lightGray
         userImage.layer.masksToBounds = true
         userImage.layer.cornerRadius = userImage.frame.width / 2
-        
     }
 
 }
