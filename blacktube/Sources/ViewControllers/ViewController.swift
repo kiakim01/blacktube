@@ -97,10 +97,11 @@ extension ViewController: UITableViewDataSource {
         cell.heartButton.isSelected = false
         cell.heartButton.tintColor = .clear
         
-        if video.isLiked {
+        if likedVideos.contains(video) {
             let filledHeart = UIImage(systemName: "heart.fill")?.imageWithColor(color: UIColor.red)
             cell.heartButton.setImage(filledHeart, for: .normal)
-        } else {
+        }
+        else {
             let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
             cell.heartButton.setImage(heart, for: .normal)
         }
