@@ -13,6 +13,7 @@ struct User: Codable {
     var profileImage: Data?
     var userName: String
     var userEmail: String
+    var likedVideos: [Video]?
 }
 
 var userData: [User] = []
