@@ -43,6 +43,7 @@ class SearchPage: UIViewController {
         let placeholderPadding = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = placeholderPadding
         textField.leftViewMode = .always
+        textField.clearButtonMode = .whileEditing
         textField.addTarget(self, action: #selector(SearchItem), for: .editingChanged)
         
         return textField
