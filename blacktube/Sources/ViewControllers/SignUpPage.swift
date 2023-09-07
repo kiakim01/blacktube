@@ -127,7 +127,7 @@ extension SignUpPage{
         
         
         let signUpList = data[indexPath.row]
-
+        
         //[Ho]
         // cell.celltype = signUpList.celltype
         
@@ -143,7 +143,7 @@ extension SignUpPage{
         return 70
     }
     
-  
+    
     @objc func checkValue(_ sender: UITextField, forCell cell:SignUpCustomCell) {
         //해당 row에 있는 cell 자체를 가져오는작업 .. !
         //let cell = UserInfotableView.cellForRow(at: IndexPath(row: sender.tag, section: 0))
@@ -170,30 +170,49 @@ extension SignUpPage{
             data[sender.tag].inputValue = text ?? ""
             data[sender.tag].pass = true
             
-//            for item in data {
-//                          print("[ID:\(item.id)],[title:\(item.title)],[pass:\(item.pass)],[inputValue:\(item.inputValue)]")
-//                      }
-
+            //            for item in data {
+            //                          print("[ID:\(item.id)],[title:\(item.title)],[pass:\(item.pass)],[inputValue:\(item.inputValue)]")
+            //                      }
+            
         }else {
             //알럿 : 내용을 다시 확인해주세요
             
         }
- 
+        
     }
     
     @objc func submitInput(_ sender:UITextField){
-            
+        
         //     [하고싶은 동작] SignUpList.pass의 모든 값이 ture 일때,
         //      1. SignUpList.inputValue에 각 데이터를 저장
         //      2. UserDefaluts저장 & customCell ("SignUpList.title값 활용")
         
-
+        
         let allPass = data.allSatisfy { item in
             return item.pass
         }
+
         
         if allPass {
             //useDefalut 저장
+            for item in data {
+                 UserDefaults.standard.set(item.inputValue, forKey: item.title)
+            }
+            
+
+        
+            
+            
+            //Check
+                        let idCheck = UserDefaults.standard.string(forKey: "ID")
+                        let passwordCheck = UserDefaults.standard.string(forKey: "Password")
+                        let nameCheck = UserDefaults.standard.string(forKey: "Name")
+                        let emailCheck = UserDefaults.standard.string(forKey: "E-mail")
+
+                        print("저장된 id,\(idCheck)")
+                        print("저장된 pw,\(passwordCheck)")
+                        print("저장된 name,\(nameCheck)")
+                        print("저장된 email,\(emailCheck)")
         }
         else {
             let alert = UIAlertController(title: "다시 확인해주세요", message: "입력되지 않은 내용이 있습니다.", preferredStyle: .alert)
@@ -204,7 +223,7 @@ extension SignUpPage{
             self.present(alert, animated: true, completion: nil)
         }
         
-
+        
         
         
         
