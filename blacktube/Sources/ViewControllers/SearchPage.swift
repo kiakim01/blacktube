@@ -9,6 +9,10 @@ import UIKit
 
 class SearchPage: UIViewController {
     
+    @IBOutlet weak var searchTableView: UITableView!
+    var searchVideos: [Video] = []
+    var searchIndex: [Int] = []
+    
     let searchBox : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -39,10 +43,11 @@ class SearchPage: UIViewController {
         let placeholderPadding = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = placeholderPadding
         textField.leftViewMode = .always
-        
+        textField.addTarget(self, action: #selector(SearchItem), for: .editingChanged)
         
         return textField
     }()
+    
     
     let micBox : UIView = {
         let micBox = UIView()
@@ -66,6 +71,10 @@ class SearchPage: UIViewController {
         super.viewDidLoad()
         configureUI()
         setLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        searchTableView.reloadData()
     }
     
 }
@@ -117,5 +126,69 @@ extension SearchPage{
             micIcon.widthAnchor.constraint(equalToConstant: 20),
             micIcon.heightAnchor.constraint(equalToConstant: 20)
         ])
+    }
+}
+
+extension SearchPage: UITableViewDelegate, UITableViewDataSource {
+    
+    @objc func SearchItem(_ sender:UITextField) {
+        let key = sender.text ?? ""
+        searchVideos = []
+        searchIndex = []
+        for i in 0..<videos.count {
+            if videos[i].title.lowercased().contains(key.lowercased()) {
+                searchVideos.append(videos[i])
+                searchIndex.append(i)
+            }
+        }
+        self.searchTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchVideos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
+        let video = videos[searchIndex[indexPath.row]]
+        cell.heartButton.tag = searchIndex[indexPath.row]
+        cell.SetupUI(video)
+        cell.heartButton.addTarget(self, action: #selector(ClickButton), for: .touchUpInside)
+        return cell
+    }
+    
+    @objc func ClickButton (_ sender: UIButton) {
+        let video = videos[sender.tag]
+        if !likedVideos.contains(video) {
+            likedVideos.append(video)
+            sender.tintColor = .red
+            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+        else {
+            for i in 0..<likedVideos.count {
+                if likedVideos[i] == video {
+                    likedVideos.remove(at: i)
+                    break
+                }
+            }
+            sender.tintColor = .gray
+            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        videos[sender.tag].isLiked.toggle()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedVideo = searchVideos[indexPath.row]
+        performSegue(withIdentifier: "SearchToDetail", sender: selectedVideo)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SearchToDetail" {
+            if let detailVC = segue.destination as? DetailViewController {
+                if let selectedVideo = sender as? Video {
+                    detailVC.video = selectedVideo
+                }
+            }
+        }
     }
 }
