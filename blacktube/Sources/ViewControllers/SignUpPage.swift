@@ -127,15 +127,12 @@ extension SignUpPage{
         
         
         let signUpList = data[indexPath.row]
-        
-        
-        
+
         //[Ho]
-        //        cell.celltype = signUpList.celltype
+        // cell.celltype = signUpList.celltype
         
         cell.titleLabel.text = signUpList.title
         cell.userInput.placeholder = signUpList.placeHolder
-        
         cell.userInput.addTarget(self, action: #selector(checkValue), for: .editingChanged)
         cell.userInput.tag = indexPath.row
         cell.checkIcon.isHidden = true
@@ -149,7 +146,7 @@ extension SignUpPage{
   
     @objc func checkValue(_ sender: UITextField, forCell cell:SignUpCustomCell) {
         //해당 row에 있는 cell 자체를 가져오는작업 .. !
-        //        let cell = UserInfotableView.cellForRow(at: IndexPath(row: sender.tag, section: 0))
+        //let cell = UserInfotableView.cellForRow(at: IndexPath(row: sender.tag, section: 0))
         
         
         
@@ -168,31 +165,47 @@ extension SignUpPage{
         
         
         let inputValue = data[sender.tag].inputValue
-        
         let spellCount = text?.count
-        
         if spellCount ?? 0 >= 5 {
-            
             data[sender.tag].inputValue = text ?? ""
             data[sender.tag].pass = true
             
-            print("[ID:\(data[sender.tag].id)],[title:\(data[sender.tag].title)],[pass:\(data[sender.tag].pass)],[inputValue:\(data[sender.tag].inputValue)]")
-            
+//            for item in data {
+//                          print("[ID:\(item.id)],[title:\(item.title)],[pass:\(item.pass)],[inputValue:\(item.inputValue)]")
+//                      }
+
         }else {
             //알럿 : 내용을 다시 확인해주세요
             
         }
-        
-        
-        
+ 
     }
     
-    
-    @objc func submitInput(){
-        
+    @objc func submitInput(_ sender:UITextField){
+            
         //     [하고싶은 동작] SignUpList.pass의 모든 값이 ture 일때,
         //      1. SignUpList.inputValue에 각 데이터를 저장
         //      2. UserDefaluts저장 & customCell ("SignUpList.title값 활용")
+        
+
+        let allPass = data.allSatisfy { item in
+            return item.pass
+        }
+        
+        if allPass {
+            //useDefalut 저장
+        }
+        else {
+            let alert = UIAlertController(title: "다시 확인해주세요", message: "입력되지 않은 내용이 있습니다.", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "확인", style: .cancel){(cancle)in}
+            
+            alert.addAction(confirmAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+
+        
         
         
         //[Ho]
