@@ -13,6 +13,7 @@ struct User: Codable {
     var profileImage: Data?
     var userName: String
     var userEmail: String
+    var likedVideos: [Video]?
 }
 
 //로그인페이지 확인용 더미데이터
@@ -21,6 +22,8 @@ var user2 = User(Id: "leech3878", password: "124578", userName: "찬호", userEm
 var userData: [User] = [user1, user2]
 var loginUser: User = User(Id: "", password: "", userName: "", userEmail: "")
 
+
 class UserManager {
     static let shared = UserManager() // Singleton instance
+
 }

@@ -7,7 +7,16 @@
 
 import UIKit
 
+//셀의 타입을 구분 및 저장하는 변수 생성
+enum Celltype{
+    case id, password,name, email
+    
+}
+
+
 class  SignUpCustomCell : UITableViewCell{
+    
+   
     
     //MARK: property
     let titleLabel: UILabel = {
@@ -43,6 +52,11 @@ class  SignUpCustomCell : UITableViewCell{
 //        view.tintColor = UIColor.green
         return view
     }()
+    
+ 
+
+    
+   var celltype : Celltype?
     
     //customCell을 만들때 작성하는 형식으로, 초기화 과정을 다루고 있음
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -85,17 +99,21 @@ class  SignUpCustomCell : UITableViewCell{
 }
 //MARK: Methode
 extension SignUpCustomCell {
-    @objc func textFieldCheck() -> Bool{
+    
+//   [조정 checkIcon]_2
+    @objc func textFieldCheck() -> Bool {
         if let text = userInput.text {
+
             let spellCount = text.count
             if spellCount >= 5 {
-                checkIcon.tintColor = .blue
-                print("true")
+                checkIcon.isHidden = false
+//                print("inCell:true")
+
                 return true
             }
         }
-        checkIcon.tintColor = .red
-        print("false")
+
+//        print("inCell:false")
         return false
     }
 }
