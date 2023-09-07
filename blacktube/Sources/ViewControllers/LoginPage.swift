@@ -100,7 +100,7 @@ extension LoginPage{
         UserInfotableView.dataSource = self
         UserInfotableView.separatorStyle = .none
         self.view.addSubview(LoginButton)
-        self.view.addSubview(goToSignUpButton)
+//        self.view.addSubview(goToSignUpButton)
       
         
         
@@ -134,11 +134,11 @@ extension LoginPage{
             
         ])
         
-        goToSignUpButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            goToSignUpButton.topAnchor.constraint(equalTo: UserInfoArea.bottomAnchor,constant: 10),
-            goToSignUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
+//        goToSignUpButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            goToSignUpButton.topAnchor.constraint(equalTo: UserInfoArea.bottomAnchor,constant: 10),
+//            goToSignUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+//        ])
         
         LoginButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([LoginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -100),
