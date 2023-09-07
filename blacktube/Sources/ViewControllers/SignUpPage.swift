@@ -8,8 +8,6 @@
 import UIKit
 
 
-
-
 class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     struct SignUpList {
@@ -20,7 +18,6 @@ class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource 
         var pass : Bool
         var inputValue : String
         let celltype : Celltype
-        
     }
     
     var data:[SignUpList] = [
@@ -31,16 +28,11 @@ class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource 
         SignUpList(id:4,title: "E-mail", placeHolder: "이메일을 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false ,inputValue:"", celltype: .email)
     ]
     
-    
-    
-    
     let InfoLabel : UILabel = {
         let label = UILabel()
         label.text = "정보를 입력해주세요"
         return label
     }()
-    
-    
     let UserInfoArea : UIView = {
         let view = UIView()
         view.layer.borderColor = UIColor.gray.cgColor
@@ -51,12 +43,8 @@ class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource 
     let UserInfotableView : UITableView = {
         let tableView = UITableView()
         tableView.`register`(SignUpCustomCell.self,forCellReuseIdentifier: "SignUpCustomCell")
-        
         return tableView
     }()
-    
-    
-    
     let signUpButton : UIButton = {
         let button = UIButton()
         button.setTitle("회원가입하기", for: .normal)
@@ -152,21 +140,20 @@ extension SignUpPage{
             return item.pass
         }
         
-        
         if allPass {
-            let item = data
-            let id = item[0].inputValue
-            let pw = item[1].inputValue
-            let name = item[3].inputValue
-            let email = item[4].inputValue
+            let id = data[0].inputValue
+            let pw = data[1].inputValue
+            let name = data[3].inputValue
+            let email = data[4].inputValue
             
             //userData 저장
             let addUserData = User (Id: id, password: pw, userName: name, userEmail: email)
             userData.append(addUserData)
             //useDefalut 저장
-            for item in data {
-                UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: item.title)
-            }
+            UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: addUserData.Id)
+            
+            print("Check:",userData)
+           
         }
         else {
             let alert = UIAlertController(title: "확인해주세요", message: "입력되지 않은 정보가 있습니다.", preferredStyle: .alert)
