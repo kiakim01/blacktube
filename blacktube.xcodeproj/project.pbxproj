@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		153F30862AA6F29A00CCC8F9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F30852AA6F29A00CCC8F9 /* DetailViewController.swift */; };
 		153F308E2AA95B2100CCC8F9 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F308D2AA95B2100CCC8F9 /* SearchTableViewCell.swift */; };
+		153F30942AA9C4FA00CCC8F9 /* LoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153F30932AA9C4FA00CCC8F9 /* LoginTableViewCell.swift */; };
 		6968A7DE2AA60B42004369BF /* LikePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6968A7DD2AA60B42004369BF /* LikePageViewController.swift */; };
 		969B03A22AA6C70A0071084E /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B03A12AA6C70A0071084E /* LoginPage.swift */; };
 		969B03A42AA6C7180071084E /* SignUpPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B03A32AA6C7180071084E /* SignUpPage.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		153F30852AA6F29A00CCC8F9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		153F308D2AA95B2100CCC8F9 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		153F30932AA9C4FA00CCC8F9 /* LoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTableViewCell.swift; sourceTree = "<group>"; };
 		6968A7DD2AA60B42004369BF /* LikePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikePageViewController.swift; sourceTree = "<group>"; };
 		969B03A12AA6C70A0071084E /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		969B03A32AA6C7180071084E /* SignUpPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPage.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				E76480552AA6CCDD00E98C07 /* LikedVideosCollectionViewCell.swift */,
 				969B03A52AA6D5A40071084E /* SignUpTableViewCell.swift */,
 				153F308D2AA95B2100CCC8F9 /* SearchTableViewCell.swift */,
+				153F30932AA9C4FA00CCC8F9 /* LoginTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -145,8 +148,8 @@
 				6968A7DD2AA60B42004369BF /* LikePageViewController.swift */,
 				E713076C2AA82A1700473563 /* EditProfileModalViewController.swift */,
 				153F30852AA6F29A00CCC8F9 /* DetailViewController.swift */,
-				D142EECE2AA60EC500F5CF9A /* Cells */,
 				969B03A72AA6F0D60071084E /* SearchPage.swift */,
+				D142EECE2AA60EC500F5CF9A /* Cells */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				E764804E2AA6B67100E98C07 /* MyPageViewController.swift in Sources */,
 				E713076D2AA82A1700473563 /* EditProfileModalViewController.swift in Sources */,
 				E7280BA52AA5FA8500D30303 /* AppDelegate.swift in Sources */,
+				153F30942AA9C4FA00CCC8F9 /* LoginTableViewCell.swift in Sources */,
 				D142EEC92AA60CB000F5CF9A /* MainTableViewCell.swift in Sources */,
 				E76480562AA6CCDD00E98C07 /* LikedVideosCollectionViewCell.swift in Sources */,
 				E713076F2AA992CF00473563 /* User.swift in Sources */,

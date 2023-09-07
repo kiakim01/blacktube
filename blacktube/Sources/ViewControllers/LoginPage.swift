@@ -14,6 +14,9 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let placeHolder: String
     }
     
+    var inputID: String = ""
+    var inputPW: String = ""
+    
     let data:[LoginList] = [
         LoginList(title: "ID", placeHolder: "ID를 입력해주세요"),
         LoginList(title: "Password", placeHolder: "비밀번호를 입력해주세요")
@@ -24,16 +27,33 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SignUpCustomCell", for:indexPath)
-            as! SignUpCustomCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LoginTableViewCell", for:indexPath)
+            as! LoginTableViewCell
         
         let LoginList = data[indexPath.row]
+        cell.selectionStyle = .none
         cell.titleLabel.text = LoginList.title
         cell.userInput.placeholder = LoginList.placeHolder
+        if indexPath.row == 1 {
+            cell.userInput.isSecureTextEntry = true
+        }
+        cell.userInput.autocapitalizationType = .none
+        cell.userInput.tag = indexPath.row
+        cell.userInput.addTarget(self, action: #selector(ChangeID), for: .editingChanged)
         cell.checkIcon.isHidden = true
         
         return cell
     }
+    
+    @objc func ChangeID (_ sender: UITextField) {
+        if sender.tag == 0 {
+            inputID = sender.text ?? ""
+        }
+        else if sender.tag == 1 {
+            inputPW = sender.text ?? ""
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
@@ -57,7 +77,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }()
     let UserInfotableView : UITableView = {
         let tableView = UITableView()
-        tableView.`register`(SignUpCustomCell.self,forCellReuseIdentifier: "SignUpCustomCell")
+        tableView.`register`(LoginTableViewCell.self,forCellReuseIdentifier: "LoginTableViewCell")
         
         return tableView
     }()
@@ -76,8 +96,42 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         button.setTitle("로그인하기", for: .normal)
         button.backgroundColor = UIColor.gray
         button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(LoginButtonClick), for: .touchUpInside)
         return button
     }()
+    
+    @objc func LoginButtonClick (_ sender: UIButton) {
+        var index: Int?
+        
+        for i in 0..<userData.count {
+            if userData[i].Id == inputID {
+                index = i
+            }
+        }
+        
+        if index == nil {
+            ShowAlert("존재하지 않는 ID입니다.")
+        }
+        else {
+            if userData[index!].password == inputPW {
+                ShowAlert("\(userData[index!].Id) 로그인 성공")
+                loginUser = userData[index!]
+                print("현재 로그인유저는 \(loginUser)")
+            }
+            else {
+                ShowAlert("암호가 틀렸습니다.")
+            }
+        }
+        
+        
+    }
+    
+    func ShowAlert (_ text: String) {
+        let alert = UIAlertController(title: "", message: text, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(ok)
+        present(alert, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
