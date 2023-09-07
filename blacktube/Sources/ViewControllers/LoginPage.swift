@@ -62,8 +62,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let mainImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "Logo")
-        //        label.backgroundColor = UIColor.red
+        image.image = UIImage(named: "blacktube_applogo_black")
         return image
     }()
     
@@ -165,13 +164,13 @@ extension LoginPage{
     func setLayout(){
         mainImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([mainImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                                     mainImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
-                                     mainImage.widthAnchor.constraint(equalToConstant:200),
-                                     mainImage.heightAnchor.constraint(equalToConstant: 200)
+                                     mainImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+                                     mainImage.widthAnchor.constraint(equalToConstant:150),
+                                     mainImage.heightAnchor.constraint(equalToConstant: 100)
                                     ])
         
         UserInfoArea.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([UserInfoArea.topAnchor.constraint(equalTo: mainImage.bottomAnchor,constant: 20),
+        NSLayoutConstraint.activate([UserInfoArea.heightAnchor.constraint(equalToConstant: 240),
                                      UserInfoArea.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10),
                                      UserInfoArea.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -10),
                                      UserInfoArea.bottomAnchor.constraint(equalTo: LoginButton.topAnchor,constant: -50)
