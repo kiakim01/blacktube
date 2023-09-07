@@ -11,11 +11,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var videos: [Video] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        videos = []
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -42,6 +41,10 @@ class ViewController: UIViewController {
                    let thumbnails = snippet["thumbnails"] as? [String: Any],
                    let standardThumbnail = thumbnails["standard"] as? [String: Any],
                    let thumbnailURL = URL(string: standardThumbnail["url"] as! String),
+                   let tags = snippet["tags"] as? [String],
+                   let publishedDate = snippet["publishedAt"] as? String,
+                   let videoId = item["id"] as? String,
+                   let description = snippet["description"] as? String,
                    let title = snippet["title"] as? String {
                     
                     let video = Video(
@@ -49,9 +52,13 @@ class ViewController: UIViewController {
                         thumbnailURL: thumbnailURL,
                         viewCount: viewCount,
                         channelTitle: channelTitle,
-                        item: item
+                        tags: tags,
+                        publishedDate: publishedDate,
+                        videoId: videoId,
+                        description: description,
+                        isLiked: false
                     )
-                    self.videos.append(video)
+                    videos.append(video)
                 }
             }
             
@@ -89,8 +96,16 @@ extension ViewController: UITableViewDataSource {
         
         cell.heartButton.isSelected = false
         cell.heartButton.tintColor = .clear
-        let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
-        cell.heartButton.setImage(heart, for: .normal)
+        
+        if video.isLiked {
+            let filledHeart = UIImage(systemName: "heart.fill")?.imageWithColor(color: UIColor.red)
+            cell.heartButton.setImage(filledHeart, for: .normal)
+        } else {
+            let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
+            cell.heartButton.setImage(heart, for: .normal)
+        }
+        
+        cell.heartButton.tag = indexPath.row
         
         DispatchQueue.global().async {
             if let imageData = try? Data(contentsOf: video.thumbnailURL) {

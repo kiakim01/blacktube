@@ -12,7 +12,14 @@ class LikePageViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var tableView: UITableView!
     
-    lazy var videos = dummyVideos
+    var videos: [Video] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        videos = likedVideos
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +28,18 @@ class LikePageViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.dataSource = self
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail", let destinationVC = segue.destination as? DetailViewController, let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.video = videos[indexPath.row]
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return videos.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -33,8 +50,8 @@ class LikePageViewController: UIViewController, UITableViewDataSource, UITableVi
         let video = videos[indexPath.row]
         cell.titleLabel.text = video.title
         cell.channelLabel.text = video.channelTitle
-        cell.viewCountLabel.text = "조회수 \(video.viewCount)"
-
+        cell.viewCountLabel.text = "| 조회수 \(video.viewCount)"
+        
         URLSession.shared.dataTask(with: video.thumbnailURL) { data, _, _ in
             if let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
@@ -42,50 +59,16 @@ class LikePageViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }.resume()
-
-        URLSession.shared.dataTask(with: video.channelIconURL) { data, _, _ in
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    cell.channelIconImageView.image = image
-                }
-            }
-        }.resume()
-
+        
         return cell
     }
-    
-    let dummyVideos: [Video2] = [
-        Video2(
-            title: "Sample Video 1",
-            thumbnailURL: URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg")!,
-            viewCount: "1M",
-            channelTitle: "Channel A",
-            channelIconURL: URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg")!
-        ),
-        Video2(
-            title: "Sample Video 2",
-            thumbnailURL: URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg")!,
-            viewCount: "2M",
-            channelTitle: "Channel B",
-            channelIconURL: URL(string: "https://spartacodingclub.kr/css/images/scc-og.jpg")!
-        ),
-    ]
 }
 
 class CustomVideoCell: UITableViewCell {
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var channelLabel: UILabel!
-    @IBOutlet weak var channelIconImageView: UIImageView!
     @IBOutlet weak var viewCountLabel: UILabel!
     
-}
-
-struct Video2 {
-    let title: String
-    let thumbnailURL: URL
-    let viewCount: String
-    let channelTitle: String
-    let channelIconURL: URL
 }
 
