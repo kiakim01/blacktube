@@ -11,20 +11,17 @@ class EditProfileModalViewController: UIViewController, UIImagePickerControllerD
     
     // MARK: - Properties
     
-    @IBOutlet var profileImage: UIImageView!
+    @IBOutlet var userImage: UIImageView!
     @IBOutlet var userNameTextField: UITextField!
     @IBOutlet var userEmailTextField: UITextField!
     
     @IBOutlet var cancelBarButtonItem: UIBarButtonItem!
     @IBOutlet var saveBarButtonItem: UIBarButtonItem!
     
-    let imagePicker: UIImagePickerController! = UIImagePickerController()
-    
-    var flagImageSave = false // 사진저장여부
-    
+    private let imagePicker: UIImagePickerController! = UIImagePickerController()
+    private var tempProfileImage: Data?
     
     // MARK: - View Life Cycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -33,28 +30,22 @@ class EditProfileModalViewController: UIViewController, UIImagePickerControllerD
 
     // MARK: - Methods
     private func configureUI() {
-        profileImage.backgroundColor = .lightGray
-        profileImage.layer.masksToBounds = true
-        profileImage.layer.cornerRadius = profileImage.frame.width / 2
-//        userNameTextField.text = userData.userName
-//        userEmailTextField.text = userData.userEmail
+        userImage.backgroundColor = .lightGray
+        userImage.layer.masksToBounds = true
+        userImage.layer.cornerRadius = userImage.frame.width / 2
         
-        
-    }
-    
-    private func loadDataFromUserDefaults () {
-//        if let savedData = UserDefaults.standard.object(forKey: "userData") as? Data {
-//            let decoder = JSONDecoder()
-//            if let savedObject = try? decoder.decode(User.self, from: savedData) {
-//                userData = savedObject
-//            }
-//        }
+        if let imageData = loginUser.profileImage {
+            userImage.image = UIImage(data: imageData)
+        }
+        userNameTextField.text = loginUser.userName
+        userEmailTextField.text = loginUser.userEmail
+
     }
     
     private func imageTapped() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
-        profileImage.addGestureRecognizer(tapGesture)
-        profileImage.isUserInteractionEnabled = true // 이미지 뷰 상호 작용하도록
+        userImage.addGestureRecognizer(tapGesture)
+        userImage.isUserInteractionEnabled = true
     }
 
     @objc private func profileImageTapped() {
@@ -64,13 +55,11 @@ class EditProfileModalViewController: UIViewController, UIImagePickerControllerD
         present(imagePicker, animated: true, completion: nil)
     }
 
-    // 이미지 선택이 완료된 후 호출
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             if let imageData = selectedImage.jpegData(compressionQuality: 0.5) {
-//                userData.profileImage = imageData
-                profileImage.image = selectedImage // 선택한 이미지로 프로필 이미지 업데이트
-                flagImageSave = true
+                tempProfileImage = imageData
+                userImage.image = selectedImage
             }
         }
         picker.dismiss(animated: true, completion: nil)
@@ -82,39 +71,38 @@ class EditProfileModalViewController: UIViewController, UIImagePickerControllerD
     
     
     @IBAction private func saveButtonTapped(_ sender: Any) {
-//        let userData = User(
-//            profileImage: userData.profileImage, // TODO: 고치기
-//            userName: userNameTextField.text ?? "", // TODO: 고치기
-//            userEmail: userEmailTextField.text ?? "" // TODO: 고치기
-//        )
-
+        
+        // 1. 편집한 유저 데이터(tempLoginUser)를 loginUser 배열에 넣기
+        loginUser.userName = userNameTextField.text ?? loginUser.userName
+        loginUser.userEmail = userEmailTextField.text ?? loginUser.userEmail
+        if tempProfileImage != nil {
+            loginUser.profileImage = tempProfileImage
+        }
+        
+        // 2. 업데이트 된 loginUser를 UserDefaults에 저장
         let encoder = JSONEncoder()
+        if let encodedLoginUser = try? encoder.encode(loginUser) {
+            UserDefaults.standard.setValue(encodedLoginUser, forKey: "loginUser")
+        }
+        
+        // 3. userData에서 loginUser를 찾아 동일한 사용자값에 씌우기
+        if let index = userData.firstIndex(where: { $0.Id == loginUser.Id }) {
+            userData[index].userName = loginUser.userName
+            userData[index].userEmail = loginUser.userEmail
+            userData[index].profileImage = loginUser.profileImage
+        }
+    
+        // 4. 업데이트 된 userData를 UserDefaults에 저장
         if let encodedToDoTasks = try? encoder.encode(userData) {
             UserDefaults.standard.setValue(encodedToDoTasks, forKey: "userData")
         }
         
         dismiss(animated: true, completion: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil)
     }
-    @IBAction func cancelButtonTapped(_ sender: Any) {
+    
+    @IBAction private func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 }
-
-
-
-
-
-// UserDefaults에 이미지 저장할때 예시
-//func saveImage() {
-//    guard let data = UIImage(named: "image").jpegData(compressionQuality: 0.5) else { return }
-//    let encoded = try! PropertyListEncoder().encode(data)
-//    UserDefaults.standard.set(encoded, forKey: "KEY")
-//}
-//
-//func loadImage() {
-//     guard let data = UserDefaults.standard.data(forKey: "KEY") else { return }
-//     let decoded = try! PropertyListDecoder().decode(Data.self, from: data)
-//     let image = UIImage(data: decoded)
-//}
-
 

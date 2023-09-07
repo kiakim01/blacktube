@@ -316,9 +316,9 @@
                     </view>
                     <connections>
                         <outlet property="cancelBarButtonItem" destination="wLI-qm-2vr" id="Zrm-9N-YQL"/>
-                        <outlet property="profileImage" destination="Kps-Qb-gEL" id="8zH-P8-vxd"/>
                         <outlet property="saveBarButtonItem" destination="EMp-we-2tv" id="2hH-cV-I4C"/>
                         <outlet property="userEmailTextField" destination="Jfn-9D-pdi" id="m0K-V1-FLx"/>
+                        <outlet property="userImage" destination="Kps-Qb-gEL" id="j7U-Sa-UBM"/>
                         <outlet property="userNameTextField" destination="jF0-vP-zVf" id="HaS-a2-VSq"/>
                     </connections>
                 </viewController>
