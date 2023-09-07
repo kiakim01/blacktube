@@ -37,7 +37,6 @@ class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource 
     let InfoLabel : UILabel = {
         let label = UILabel()
         label.text = "정보를 입력해주세요"
-        //        label.backgroundColor = UIColor.red
         return label
     }()
     
@@ -124,12 +123,7 @@ extension SignUpPage{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SignUpCustomCell", for:indexPath)
         as! SignUpCustomCell
-        
-        
         let signUpList = data[indexPath.row]
-        
-        //[Ho]
-        // cell.celltype = signUpList.celltype
         
         cell.titleLabel.text = signUpList.title
         cell.userInput.placeholder = signUpList.placeHolder
@@ -145,153 +139,40 @@ extension SignUpPage{
     
     
     @objc func checkValue(_ sender: UITextField, forCell cell:SignUpCustomCell) {
-        //해당 row에 있는 cell 자체를 가져오는작업 .. !
-        //let cell = UserInfotableView.cellForRow(at: IndexPath(row: sender.tag, section: 0))
-        
-        
-        
-        //[하고싶은 동작] : inputText와 condition를 비교 후 일치하면,
-        // 1.cell의 UI 변경 checkIcon.isHidden = false
-        // 2.data의 변경 : SignUpList.pass = true
-        // 3.data의 변경 : inputValue = inputText.text
-        
-        //A.cell.userInput.text
         let text = sender.text
-        //B.SignUpList의 데이터
-        //        let condition = data[sender.tag].condition
-        //C.checkIcon [조정 checkIcon]_1
-        let cell = cell
-        //        let icon = cell.checkIcon
-        
-        
-        let inputValue = data[sender.tag].inputValue
         let spellCount = text?.count
         if spellCount ?? 0 >= 5 {
             data[sender.tag].inputValue = text ?? ""
             data[sender.tag].pass = true
-            
-            //            for item in data {
-            //                          print("[ID:\(item.id)],[title:\(item.title)],[pass:\(item.pass)],[inputValue:\(item.inputValue)]")
-            //                      }
-            
-        }else {
-            //알럿 : 내용을 다시 확인해주세요
-            
         }
-        
     }
     
     @objc func submitInput(_ sender:UITextField){
-        
-        //     [하고싶은 동작] SignUpList.pass의 모든 값이 ture 일때,
-        //      1. SignUpList.inputValue에 각 데이터를 저장
-        //      2. UserDefaluts저장 & customCell ("SignUpList.title값 활용")
-        
-        
         let allPass = data.allSatisfy { item in
             return item.pass
         }
-
+        
         
         if allPass {
+            let item = data
+            let id = item[0].inputValue
+            let pw = item[1].inputValue
+            let name = item[3].inputValue
+            let email = item[4].inputValue
+            
+            //userData 저장
+            let addUserData = User (Id: id, password: pw, userName: name, userEmail: email)
+            userData.append(addUserData)
             //useDefalut 저장
-            //규연님 코드 참고
             for item in data {
-                 UserDefaults.standard.set(item.inputValue, forKey: item.title)
+                UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: item.title)
             }
-            
-
-        
-            
-            
-            //Check
-                        let idCheck = UserDefaults.standard.string(forKey: "ID")
-                        let passwordCheck = UserDefaults.standard.string(forKey: "Password")
-                        let nameCheck = UserDefaults.standard.string(forKey: "Name")
-                        let emailCheck = UserDefaults.standard.string(forKey: "E-mail")
-
-                        print("저장된 id,\(idCheck)")
-                        print("저장된 pw,\(passwordCheck)")
-                        print("저장된 name,\(nameCheck)")
-                        print("저장된 email,\(emailCheck)")
         }
         else {
             let alert = UIAlertController(title: "확인해주세요", message: "입력되지 않은 정보가 있습니다.", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .cancel){(cancle)in}
-            
             alert.addAction(confirmAction)
-            
             self.present(alert, animated: true, completion: nil)
         }
-        
-        
-        
-        
-        
-        //[Ho]
-        //        data[0].inputValue //id
-        //        data[1].inputValue //password
-        //        data[3].inputValue //name
-        //        data[4].inputValue //email
-        //
-        //
-        //        switch data[0].celltype {
-        //
-        //
-        //        case .id:
-        //            UserDefaults.standard.set(data[0].inputValue, forKey: "id")
-        //        case .password:
-        //            UserDefaults.standard.set(data[1].inputValue, forKey: "password")
-        //        case .name:
-        //            UserDefaults.standard.set(data[3].inputValue, forKey: "name")
-        //        case .email:
-        //            UserDefaults.standard.set(data[4].inputValue, forKey: "email")
-        //        }
-        //
-        //        switch data[1].celltype {
-        //            //
-        //
-        //        case .id:
-        //            UserDefaults.standard.set(data[0].inputValue, forKey: "id")
-        //        case .password:
-        //            UserDefaults.standard.set(data[1].inputValue, forKey: "password")
-        //        case .name:
-        //            UserDefaults.standard.set(data[3].inputValue, forKey: "name")
-        //        case .email:
-        //            UserDefaults.standard.set(data[4].inputValue, forKey: "email")
-        //        }
-        //
-        //        switch data[3].celltype {
-        //
-        //        case .id:
-        //            UserDefaults.standard.set(data[0].inputValue, forKey: "id")
-        //        case .password:
-        //            UserDefaults.standard.set(data[1].inputValue, forKey: "password")
-        //        case .name:
-        //            UserDefaults.standard.set(data[3].inputValue, forKey: "name")
-        //        case .email:
-        //            UserDefaults.standard.set(data[4].inputValue, forKey: "email")
-        //        }
-        //
-        //        switch data[4].celltype {
-        //        case .id:
-        //            UserDefaults.standard.set(data[0].inputValue, forKey: "id")
-        //        case .password:
-        //            UserDefaults.standard.set(data[1].inputValue, forKey: "password")
-        //        case .name:
-        //            UserDefaults.standard.set(data[3].inputValue, forKey: "name")
-        //        case .email:
-        //            UserDefaults.standard.set(data[4].inputValue, forKey: "email")
-        //        }
-        
-        // Assuming you have populated the `userData` array with `UserData` objects
-        
-        
-        
     }
-    
-    
-    
-    
-    
 }
