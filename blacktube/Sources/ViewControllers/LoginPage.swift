@@ -68,7 +68,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(UIColor.gray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        return button
+      return button
     }()
     
     let LoginButton : UIButton = {
@@ -85,6 +85,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         setLayout()
     }
     
+
     
 }
 
@@ -99,7 +100,11 @@ extension LoginPage{
         UserInfotableView.dataSource = self
         UserInfotableView.separatorStyle = .none
         self.view.addSubview(LoginButton)
-        self.view.addSubview(goToSignUpButton)
+//        self.view.addSubview(goToSignUpButton)
+      
+        
+        
+      
     
     }
     
@@ -129,11 +134,11 @@ extension LoginPage{
             
         ])
         
-        goToSignUpButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            goToSignUpButton.topAnchor.constraint(equalTo: UserInfoArea.bottomAnchor,constant: 10),
-            goToSignUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
+//        goToSignUpButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            goToSignUpButton.topAnchor.constraint(equalTo: UserInfoArea.bottomAnchor,constant: 10),
+//            goToSignUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+//        ])
         
         LoginButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([LoginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -100),

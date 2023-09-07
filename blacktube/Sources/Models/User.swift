@@ -19,6 +19,8 @@ struct User: Codable {
 var userData: [User] = []
 var loginUser: User = User(Id: "", password: "", userName: "", userEmail: "")
 
+
 class UserManager {
     static let shared = UserManager() // Singleton instance
+
 }
