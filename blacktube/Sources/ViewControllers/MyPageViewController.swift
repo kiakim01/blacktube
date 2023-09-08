@@ -56,15 +56,16 @@ class MyPageViewController: UIViewController {
         }
         userNameLabel.text = loginUser.userName
         userEmailLabel.text = loginUser.userEmail
-        setAppLogoToNavigationBar()
-    }
-    func setAppLogoToNavigationBar() {
-        
-        let logoImageView = UIImageView(image: UIImage(named: "blacktube_applogo_black"))
-        logoImageView.frame = CGRect(x: 20, y: 5, width: 40, height: 27)
-        navigationBar.addSubview(logoImageView)
+//        setAppLogoToNavigationBar()
     }
     
+//    func setAppLogoToNavigationBar() {
+//
+//        let logoImageView = UIImageView(image: UIImage(named: "blacktube_applogo_black"))
+//        logoImageView.frame = CGRect(x: 20, y: 5, width: 40, height: 27)
+//        navigationBar.addSubview(logoImageView)
+//    }
+
     @objc private func refreshUserData(notification: NSNotification){
         likedVideosCollectionView.reloadData()
         configureUI()
