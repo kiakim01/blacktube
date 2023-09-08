@@ -186,35 +186,32 @@ extension LoginPage{
         
         UserInfoArea.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([UserInfoArea.heightAnchor.constraint(equalToConstant: 240),
-                                     UserInfoArea.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10),
-                                     UserInfoArea.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -10),
-                                     UserInfoArea.bottomAnchor.constraint(equalTo: LoginButton.topAnchor,constant: -50)
-    
+                                     UserInfoArea.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+                                     UserInfoArea.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+                                     UserInfoArea.topAnchor.constraint(equalTo: mainImage.bottomAnchor,constant: 50),
                                     ])
         UserInfotableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-         
-   
-            UserInfotableView.topAnchor.constraint(equalTo: UserInfoArea.topAnchor,constant: 40),
+         UserInfotableView.topAnchor.constraint(equalTo: UserInfoArea.topAnchor,constant: 40),
             UserInfotableView.bottomAnchor.constraint(equalTo: UserInfoArea.bottomAnchor),
             UserInfotableView.leftAnchor.constraint(equalTo: UserInfoArea.leftAnchor),
             UserInfotableView.rightAnchor.constraint(equalTo: UserInfoArea.rightAnchor)
             
         ])
         
-        goToSignUpButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            goToSignUpButton.topAnchor.constraint(equalTo: UserInfoArea.bottomAnchor,constant: 10),
-            goToSignUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
         LoginButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([LoginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -100),
+        NSLayoutConstraint.activate([
+            LoginButton.topAnchor.constraint(equalTo: UserInfoArea.bottomAnchor, constant: 40),
                                      LoginButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-                                     LoginButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+                                     LoginButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),LoginButton.bottomAnchor.constraint(equalTo: goToSignUpButton.topAnchor,constant: 10),
                                      LoginButton.heightAnchor.constraint(equalToConstant: 70)
                                     ])
       
+        goToSignUpButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            goToSignUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -65),
+            goToSignUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
 
     }
 }

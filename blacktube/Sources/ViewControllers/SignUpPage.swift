@@ -23,7 +23,7 @@ class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource 
     var data:[SignUpList] = [
         SignUpList(id:0, title: "ID", placeHolder: "ID를 입력해주세요", condition: "^[a-zA-Z0-9]{3,}$",pass: false, inputValue:"", isSecure: false),
         SignUpList(id:1,title: "Password", placeHolder: "비밀번호를 입력해주세요", condition:"^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: true),
-        SignUpList(id:2,title: "Password check", placeHolder: "비밀번호를 다시 입력해주세요", condition: "^[a-zA-Z0-9]{8,16}$",pass: false ,inputValue:"", isSecure: true),
+        SignUpList(id:2,title: "Password check", placeHolder: "비밀번호를 다시 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false ,inputValue:"", isSecure: true),
         SignUpList(id:3,title: "Name", placeHolder: "이름을 입력해주   세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: false ),
         SignUpList(id:4,title: "E-mail", placeHolder: "이메일을 입력해주세요", condition: "^[a-zA-Z0-9_+.-]+@[a-zA-Z0-9.-]+$",pass: false ,inputValue:"", isSecure: false)
     ]
@@ -120,17 +120,26 @@ extension SignUpPage{
         cell.titleLabel.text = signUpList.title
         cell.userInput.placeholder = signUpList.placeHolder
         
+       
         cell.passHandler = {[weak self] pass in
             self?.data[indexPath.row].pass = pass
             
         }
+        //클로져[3] 본문
+        cell.inputValueHandler = {[weak self] inputValueCell in self?.data[indexPath.row].inputValue = inputValueCell
+        }
+        
         cell.userInput.tag = indexPath.row
         cell.checkIcon.isHidden = true
         cell.condition = signUpList.condition
         
+
+        
         if signUpList.isSecure {
             cell.userInput.isSecureTextEntry = true
         }
+        
+//        sum(left: 1, right: 2)
         
         return cell
     }
@@ -139,6 +148,12 @@ extension SignUpPage{
         return 70
     }
     
+    
+//    func sum (left A:Int,right B:Int) -> Int{
+//       let result = A + B
+//        return result
+//    }
+//
     
     
     @objc func submitInput(_ sender:UITextField){
@@ -158,9 +173,14 @@ extension SignUpPage{
             //useDefalut 저장
             UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: addUserData.Id)
             
+            print("userData:", userData)
+            
             let loginPage = LoginPage()
             //            self.navigationController?.pushViewController(loginPage, animated: true)
             self.present(loginPage, animated: true)
+            
+            
+          
 //            print("!!",data[0].pass)
 //            print(data[1].pass)
 //            print(data[2].pass)

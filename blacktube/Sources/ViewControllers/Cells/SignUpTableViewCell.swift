@@ -13,8 +13,9 @@ class  SignUpCustomCell : UITableViewCell{
     //bring VC data
     var condition = ""
     
-    //클로져!!!
+    //클로져[1] 선언 타입 지정!!!
     var passHandler:((Bool)->Void)?
+    var inputValueHandler:((String)->Void)?
     
     //MARK: property
     let titleLabel: UILabel = {
@@ -83,10 +84,15 @@ extension SignUpCustomCell {
     
     
     @objc func textFieldCheck() {
-        let userIput = userInput.text
-        let pass = isValid(str: userIput  ?? "", condition: condition)
+        let inputValue = userInput.text
+        let pass = isValid(str: inputValue  ?? "", condition: condition)
         if pass {
             checkIcon.isHidden = false
+            //userInput에 저장된 내용을 VC에 보내줘야함
+            print("cell text 확인:",inputValue ?? "")
+            //클로져[2]실행(파라미터)
+            inputValueHandler?(inputValue ?? "")
+            
         }
         passHandler?(pass)
     }
