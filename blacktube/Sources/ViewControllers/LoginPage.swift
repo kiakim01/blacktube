@@ -12,14 +12,15 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
     struct LoginList {
         let title: String
         let placeHolder: String
+        let isSecure : Bool
     }
     
     var inputID: String = ""
     var inputPW: String = ""
     
     let data:[LoginList] = [
-        LoginList(title: "ID", placeHolder: "ID를 입력해주세요"),
-        LoginList(title: "Password", placeHolder: "비밀번호를 입력해주세요")
+        LoginList(title: "ID", placeHolder: "ID를 입력해주세요",isSecure: false),
+        LoginList(title: "Password", placeHolder: "비밀번호를 입력해주세요",isSecure: true)
        
     ]
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,10 +31,10 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LoginTableViewCell", for:indexPath)
             as! LoginTableViewCell
         
-        let LoginList = data[indexPath.row]
+        let loginList = data[indexPath.row]
         cell.selectionStyle = .none
-        cell.titleLabel.text = LoginList.title
-        cell.userInput.placeholder = LoginList.placeHolder
+        cell.titleLabel.text = loginList.title
+        cell.userInput.placeholder = loginList.placeHolder
         if indexPath.row == 1 {
             cell.userInput.isSecureTextEntry = true
         }
@@ -41,6 +42,11 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.userInput.tag = indexPath.row
         cell.userInput.addTarget(self, action: #selector(ChangeID), for: .editingChanged)
         cell.checkIcon.isHidden = true
+        
+        if loginList.isSecure {
+            cell.userInput.isSecureTextEntry = true
+        }
+        
         
         return cell
     }
@@ -62,8 +68,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let mainImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "Logo")
-        //        label.backgroundColor = UIColor.red
+        image.image = UIImage(named: "blacktube_applogo_black")
         return image
     }()
     
@@ -88,6 +93,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(UIColor.gray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+     
       return button
     }()
     
@@ -96,9 +102,15 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         button.setTitle("로그인하기", for: .normal)
         button.backgroundColor = UIColor.gray
         button.layer.cornerRadius = 20
-        button.addTarget(self, action: #selector(LoginButtonClick), for: .touchUpInside)
         return button
     }()
+    
+    //navigation
+    @objc func signUpButtonClick(){
+            let signUpPageVC = SignUpPage()
+        self.navigationController?.pushViewController(signUpPageVC, animated: true)
+//        self.present(signUpPageVC, animated: true)
+    }
     
     @objc func LoginButtonClick (_ sender: UIButton) {
         var index: Int?
@@ -147,6 +159,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 extension LoginPage{
     func configureUI(){
+        view.backgroundColor = UIColor.white
         self.view.addSubview(mainImage)
         self.view.addSubview(UserInfoArea)
         UserInfoArea.addSubview(UserInfotableView)
@@ -154,10 +167,9 @@ extension LoginPage{
         UserInfotableView.dataSource = self
         UserInfotableView.separatorStyle = .none
         self.view.addSubview(LoginButton)
-//        self.view.addSubview(goToSignUpButton)
-      
-        
-        
+        self.view.addSubview(goToSignUpButton)
+        goToSignUpButton.addTarget(self, action: #selector(signUpButtonClick), for: .touchUpInside)
+        LoginButton.addTarget(self, action: #selector(LoginButtonClick), for: .touchUpInside)
       
     
     }
@@ -165,42 +177,39 @@ extension LoginPage{
     func setLayout(){
         mainImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([mainImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                                     mainImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
-                                     mainImage.widthAnchor.constraint(equalToConstant:200),
-                                     mainImage.heightAnchor.constraint(equalToConstant: 200)
+                                     mainImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+                                     mainImage.widthAnchor.constraint(equalToConstant:150),
+                                     mainImage.heightAnchor.constraint(equalToConstant: 100)
                                     ])
         
         UserInfoArea.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([UserInfoArea.topAnchor.constraint(equalTo: mainImage.bottomAnchor,constant: 20),
-                                     UserInfoArea.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10),
-                                     UserInfoArea.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -10),
-                                     UserInfoArea.bottomAnchor.constraint(equalTo: LoginButton.topAnchor,constant: -50)
-    
+        NSLayoutConstraint.activate([UserInfoArea.heightAnchor.constraint(equalToConstant: 240),
+                                     UserInfoArea.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+                                     UserInfoArea.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+                                     UserInfoArea.topAnchor.constraint(equalTo: mainImage.bottomAnchor,constant: 50),
                                     ])
         UserInfotableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-         
-   
-            UserInfotableView.topAnchor.constraint(equalTo: UserInfoArea.topAnchor,constant: 40),
+         UserInfotableView.topAnchor.constraint(equalTo: UserInfoArea.topAnchor,constant: 40),
             UserInfotableView.bottomAnchor.constraint(equalTo: UserInfoArea.bottomAnchor),
             UserInfotableView.leftAnchor.constraint(equalTo: UserInfoArea.leftAnchor),
             UserInfotableView.rightAnchor.constraint(equalTo: UserInfoArea.rightAnchor)
             
         ])
         
-//        goToSignUpButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            goToSignUpButton.topAnchor.constraint(equalTo: UserInfoArea.bottomAnchor,constant: 10),
-//            goToSignUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-//        ])
-        
         LoginButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([LoginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -100),
+        NSLayoutConstraint.activate([
+            LoginButton.topAnchor.constraint(equalTo: UserInfoArea.bottomAnchor, constant: 40),
                                      LoginButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-                                     LoginButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+                                     LoginButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),LoginButton.bottomAnchor.constraint(equalTo: goToSignUpButton.topAnchor,constant: 10),
                                      LoginButton.heightAnchor.constraint(equalToConstant: 70)
                                     ])
       
+        goToSignUpButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            goToSignUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -65),
+            goToSignUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
 
     }
 }
