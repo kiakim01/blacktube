@@ -16,7 +16,10 @@ struct User: Codable {
     var likedVideos: [Video]?
 }
 
-var userData: [User] = []
+//로그인페이지 확인용 더미데이터
+var user1 = User(Id: "lcho3878", password: "102030", userName: "이찬호", userEmail: "leech3878@naver.com")
+var user2 = User(Id: "leech3878", password: "124578", userName: "찬호", userEmail: "leech3878@google.com")
+var userData: [User] = [user1, user2]
 var loginUser: User = User(Id: "", password: "", userName: "", userEmail: "")
 
 
