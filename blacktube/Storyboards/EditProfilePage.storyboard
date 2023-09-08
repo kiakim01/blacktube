@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NeC-Vy-fiy">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Edit Profile Modal View Controller-->
+        <scene sceneID="9bb-Jw-iUs">
+            <objects>
+                <viewController storyboardIdentifier="EditProfileModalViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NeC-Vy-fiy" customClass="EditProfileModalViewController" customModule="blacktube" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oJO-NL-c9Y">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LRz-Nk-hCV">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" systemColor="labelColor"/>
+                                    <color key="textShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
+                                <textAttributes key="largeTitleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="프로필 편집" id="xHw-d0-bxU">
+                                        <barButtonItem key="leftBarButtonItem" title="취소" id="0fb-Vc-OUV">
+                                            <connections>
+                                                <action selector="cancelButtonTapped:" destination="NeC-Vy-fiy" id="jCF-tE-3hc"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="완료" id="nB4-9t-92d">
+                                            <connections>
+                                                <action selector="saveButtonTapped:" destination="NeC-Vy-fiy" id="Ib0-VF-ctN"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GrG-62-0xD">
+                                <rect key="frame" x="183" y="159" width="150" height="150"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="ggY-Yu-hGn"/>
+                                    <constraint firstAttribute="height" constant="150" id="hr8-15-6yU"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNd-GM-DKZ">
+                                <rect key="frame" x="60" y="372" width="30" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8z-FC-hy7">
+                                <rect key="frame" x="60" y="431" width="78" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mvk-U3-Ghi">
+                                <rect key="frame" x="178" y="365" width="160" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zki-aS-qmw">
+                                <rect key="frame" x="178" y="431" width="160" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="프로필 사진" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pjB-k3-WvF">
+                                <rect key="frame" x="60" y="223.66666666666666" width="78" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0Y7-uG-vyQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="GrG-62-0xD" firstAttribute="centerX" secondItem="mvk-U3-Ghi" secondAttribute="centerX" id="1HF-TN-e6b"/>
+                            <constraint firstItem="GrG-62-0xD" firstAttribute="centerY" secondItem="pjB-k3-WvF" secondAttribute="centerY" id="5OF-a9-gVI"/>
+                            <constraint firstItem="Zki-aS-qmw" firstAttribute="leading" secondItem="mvk-U3-Ghi" secondAttribute="leading" id="5bU-Ye-Dsw"/>
+                            <constraint firstItem="GrG-62-0xD" firstAttribute="leading" secondItem="pjB-k3-WvF" secondAttribute="trailing" constant="45" id="75V-qF-XJP"/>
+                            <constraint firstItem="j8z-FC-hy7" firstAttribute="leading" secondItem="nNd-GM-DKZ" secondAttribute="leading" id="Afn-Li-9XC"/>
+                            <constraint firstItem="j8z-FC-hy7" firstAttribute="leading" secondItem="pjB-k3-WvF" secondAttribute="leading" id="DXO-r4-p49"/>
+                            <constraint firstItem="Zki-aS-qmw" firstAttribute="leading" secondItem="j8z-FC-hy7" secondAttribute="trailing" constant="40" id="MTm-CS-nqz"/>
+                            <constraint firstItem="0Y7-uG-vyQ" firstAttribute="trailing" secondItem="GrG-62-0xD" secondAttribute="trailing" constant="60" id="Ncm-nN-qtX"/>
+                            <constraint firstItem="j8z-FC-hy7" firstAttribute="top" secondItem="Zki-aS-qmw" secondAttribute="top" id="PjP-oJ-7tu"/>
+                            <constraint firstItem="LRz-Nk-hCV" firstAttribute="trailing" secondItem="0Y7-uG-vyQ" secondAttribute="trailing" id="QHU-5c-M1i"/>
+                            <constraint firstItem="mvk-U3-Ghi" firstAttribute="top" secondItem="GrG-62-0xD" secondAttribute="bottom" constant="56" id="TAZ-f3-1Xi"/>
+                            <constraint firstItem="0Y7-uG-vyQ" firstAttribute="trailing" secondItem="Zki-aS-qmw" secondAttribute="trailing" constant="55" id="VFT-3n-xhv"/>
+                            <constraint firstItem="LRz-Nk-hCV" firstAttribute="top" secondItem="0Y7-uG-vyQ" secondAttribute="top" id="Xxw-cj-e1f"/>
+                            <constraint firstItem="GrG-62-0xD" firstAttribute="centerX" secondItem="Zki-aS-qmw" secondAttribute="centerX" id="YCS-wz-leJ"/>
+                            <constraint firstItem="LRz-Nk-hCV" firstAttribute="leading" secondItem="0Y7-uG-vyQ" secondAttribute="leading" id="Z8r-T5-6b0"/>
+                            <constraint firstItem="Zki-aS-qmw" firstAttribute="top" secondItem="mvk-U3-Ghi" secondAttribute="bottom" constant="32" id="h3v-zU-M2Z"/>
+                            <constraint firstItem="j8z-FC-hy7" firstAttribute="top" secondItem="nNd-GM-DKZ" secondAttribute="bottom" constant="38" id="tYM-8X-hjf"/>
+                            <constraint firstItem="j8z-FC-hy7" firstAttribute="leading" secondItem="0Y7-uG-vyQ" secondAttribute="leading" constant="60" id="tqJ-Iz-rhh"/>
+                            <constraint firstItem="GrG-62-0xD" firstAttribute="top" secondItem="LRz-Nk-hCV" secondAttribute="bottom" constant="56" id="wZf-FD-w6q"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelBarButtonItem" destination="0fb-Vc-OUV" id="NQ9-9F-US7"/>
+                        <outlet property="saveBarButtonItem" destination="nB4-9t-92d" id="xHj-BG-fY3"/>
+                        <outlet property="userEmailTextField" destination="Zki-aS-qmw" id="Hnk-Cf-uLz"/>
+                        <outlet property="userImage" destination="GrG-62-0xD" id="Ztj-mo-m1q"/>
+                        <outlet property="userNameTextField" destination="mvk-U3-Ghi" id="qcP-oj-pAS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E19-qv-JjN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1041.9847328244275" y="-239.43661971830988"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

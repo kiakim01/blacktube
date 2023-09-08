@@ -69,6 +69,21 @@ class MyPageViewController: UIViewController {
         configureUI()
     }
     
+    @objc private func showEditProfileModal() {
+        
+        let editProfileModalVC = UIStoryboard(name: "EditProfilePage", bundle: nil).instantiateViewController(withIdentifier: "EditProfileModalViewController") as! EditProfileModalViewController
+        editProfileModalVC.modalPresentationStyle = .pageSheet
+
+        if let presentationController = editProfileModalVC.presentationController as? UISheetPresentationController {
+            presentationController.detents = [.medium()]
+        }
+        self.present(editProfileModalVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func moveToEditProfileModal(_ sender: Any) {
+        showEditProfileModal()
+    }
+    
     // MARK: 테스트용 코드 (시작) =========================================================================
     
     // 0. UserDefaults에 더미 넣기
@@ -175,3 +190,5 @@ extension MyPageViewController: UINavigationBarDelegate {
         return .topAttached
     }
 }
+
+
