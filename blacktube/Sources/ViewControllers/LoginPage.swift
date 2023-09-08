@@ -169,10 +169,22 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         present(alert, animated: true)
     }
     
+    func CheckDarkMode() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else { return }
+        if loginUser.isDarkMode{
+            window.overrideUserInterfaceStyle = .dark
+        }
+        else {
+            window.overrideUserInterfaceStyle = .light
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         UserManager.shared.LoadLoginUser()
         UserManager.shared.LoadUserData()
+        CheckDarkMode()
         if loginUser != guest {
             GoToMain()
         }

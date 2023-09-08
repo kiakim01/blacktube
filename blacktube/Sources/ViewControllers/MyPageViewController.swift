@@ -97,13 +97,12 @@ class MyPageViewController: UIViewController {
             }
             self.view.window?.overrideUserInterfaceStyle = .dark
         }
-//        loginUser.isDarkMode.toggle()
-//        if let index = userData.firstIndex(where: { $0.Id == loginUser.Id }) {
-//            userData[index].isDarkMode = loginUser.isDarkMode
-//        }
-//        UserManager.shared.SaveLoginUser()
-//        UserManager.shared.SaveUserData()
-//        print("Darkmode is \(loginUser.isDarkMode)")
+        loginUser.isDarkMode.toggle()
+        if let index = userData.firstIndex(where: { $0.Id == loginUser.Id }) {
+            userData[index].isDarkMode = loginUser.isDarkMode
+        }
+        UserManager.shared.SaveLoginUser()
+        UserManager.shared.SaveUserData()
     }
     @IBAction func moveToEditProfileModal(_ sender: Any) {
         showEditProfileModal()

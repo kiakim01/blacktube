@@ -14,6 +14,7 @@ struct User: Codable {
     var userName: String
     var userEmail: String
     var likedVideos: [Video] = []
+    var isDarkMode: Bool = false
 }
 
 extension User: Equatable {
