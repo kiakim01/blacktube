@@ -24,7 +24,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2hl-G1-qFq">
-                                <rect key="frame" x="0.0" y="103" width="393" height="675"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="videoCell" id="5vc-rx-pJV" customClass="CustomVideoCell" customModule="blacktube" customModuleProvider="target">
@@ -98,7 +98,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7gB-qA-pC6" secondAttribute="trailing" id="G12-FZ-S3W"/>
                             <constraint firstItem="2hl-G1-qFq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Nx8-Dd-lHY"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2hl-G1-qFq" secondAttribute="trailing" id="V6M-Gj-jo0"/>
-                            <constraint firstItem="2hl-G1-qFq" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="9" id="Vnm-MT-Uwo"/>
+                            <constraint firstItem="2hl-G1-qFq" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="Vnm-MT-Uwo"/>
                             <constraint firstItem="7gB-qA-pC6" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="59" id="dLL-8g-zkA"/>
                             <constraint firstItem="7gB-qA-pC6" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="mRV-W7-MNg"/>
                             <constraint firstItem="7gB-qA-pC6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ojt-jh-qMd"/>
@@ -114,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="166" y="-129"/>
+            <point key="canvasLocation" x="165.64885496183206" y="-129.57746478873241"/>
         </scene>
         <!--DetailPage-->
         <scene sceneID="LUa-dX-Arq">
