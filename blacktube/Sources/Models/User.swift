@@ -13,7 +13,7 @@ struct User: Codable {
     var profileImage: Data?
     var userName: String
     var userEmail: String
-    var likedVideos: [Video]?
+    var likedVideos: [Video] = []
 }
 
 extension User: Equatable {

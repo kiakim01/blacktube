@@ -119,11 +119,14 @@ extension SignUpPage{
             let addUserData = User (Id: id, password: pw, userName: name, userEmail: email)
             userData.append(addUserData)
             //useDefalut 저장
-            UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: addUserData.Id)
+//            UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: addUserData.Id)
+            UserManager.shared.SaveUserData()
 
             //navigation
-            let loginPage = LoginPage()
-            self.present(loginPage, animated: true)
+            self.navigationController?.popViewController(animated: true)
+            
+//            let loginPage = LoginPage()
+//            self.present(loginPage, animated: true)
             
         }
         else {
