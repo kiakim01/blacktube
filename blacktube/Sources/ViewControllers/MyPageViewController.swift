@@ -104,6 +104,8 @@ class MyPageViewController: UIViewController {
     }
     
     @IBAction func logoutButtonClick(_ sender: Any) {
+        loginUser = guest
+        UserManager.shared.SaveLoginUser()
         let newStoryboard = UIStoryboard(name: "LoginPage", bundle: nil)
         let newViewController = newStoryboard.instantiateViewController(identifier: "LoginPage")
         self.changeRootViewController(newViewController)

@@ -107,7 +107,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //navigation
     @objc func signUpButtonClick(){
-            let signUpPageVC = SignUpPage()
+        let signUpPageVC = SignUpPage()
         self.navigationController?.pushViewController(signUpPageVC, animated: true)
 //        self.present(signUpPageVC, animated: true)
     }
