@@ -128,7 +128,9 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if userData[index!].password == inputPW {
                 ShowAlert("\(userData[index!].Id) 로그인 성공")
                 loginUser = userData[index!]
-                print("현재 로그인유저는 \(loginUser)")
+                UserManager.shared.SaveLoginUser()
+                GoToMain()
+                
             }
             else {
                 ShowAlert("암호가 틀렸습니다.")
@@ -136,6 +138,20 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         
+    }
+    func GoToMain() {
+        let newStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = newStoryboard.instantiateViewController(identifier: "MainNavigation")
+        self.changeRootViewController(newViewController)
+    }
+    func changeRootViewController(_ viewControllerToPresent: UIViewController) {
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = viewControllerToPresent
+            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil)
+        } else {
+            viewControllerToPresent.modalPresentationStyle = .overFullScreen
+            self.present(viewControllerToPresent, animated: true, completion: nil)
+        }
     }
     
     func ShowAlert (_ text: String) {
@@ -147,6 +163,12 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UserManager.shared.LoadLoginUser()
+        UserManager.shared.LoadUserData()
+        if loginUser != guest {
+            GoToMain()
+        }
+        print(loginUser)
         configureUI()
         setLayout()
     }

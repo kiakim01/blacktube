@@ -75,7 +75,7 @@
                                             <color key="baseBackgroundColor" systemColor="labelColor"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <segue destination="eYZ-T7-igt" kind="show" id="RcR-PY-2lh"/>
+                                            <action selector="logoutButtonClick:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="CNw-36-pba"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -225,16 +225,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="124.42748091603053" y="-34.507042253521128"/>
-        </scene>
-        <!--LoginPage-->
-        <scene sceneID="gph-gv-Qf1">
-            <objects>
-                <viewControllerPlaceholder storyboardName="LoginPage" id="eYZ-T7-igt" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="XCA-1E-nJo"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lnf-Z5-jgS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="903" y="256"/>
         </scene>
         <!--DetailPage-->
         <scene sceneID="WAd-m0-omI">

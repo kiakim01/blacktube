@@ -42,6 +42,7 @@ class MyPageViewController: UIViewController {
         
         super.viewWillAppear(animated)
         likedVideosCollectionView.reloadData()
+
     }
     
     // MARK: - UI
@@ -101,6 +102,23 @@ class MyPageViewController: UIViewController {
     @IBAction func moveToEditProfileModal(_ sender: Any) {
         showEditProfileModal()
     }
+    
+    @IBAction func logoutButtonClick(_ sender: Any) {
+        let newStoryboard = UIStoryboard(name: "LoginPage", bundle: nil)
+        let newViewController = newStoryboard.instantiateViewController(identifier: "LoginPage")
+        self.changeRootViewController(newViewController)
+    }
+    
+    func changeRootViewController(_ viewControllerToPresent: UIViewController) {
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = viewControllerToPresent
+            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil)
+        } else {
+            viewControllerToPresent.modalPresentationStyle = .overFullScreen
+            self.present(viewControllerToPresent, animated: true, completion: nil)
+        }
+    }
+    
     
     // MARK: 테스트용 코드 (시작) =========================================================================
     
