@@ -19,7 +19,8 @@ class MyPageViewController: UIViewController {
     @IBOutlet var userEmailLabel: UILabel!
     @IBOutlet var editProfileButton: UIButton!
     @IBOutlet var logOutButton: UIButton!
-    
+
+    @IBOutlet var switchDarkModeButton: UIButton!
     @IBOutlet var likedVideosCollectionView: UICollectionView!
     
     
@@ -35,7 +36,6 @@ class MyPageViewController: UIViewController {
 //        inputDummyToUserDefaults() // 0. UserDefaults에 더미 넣기(테스트용)
         loadDataFromUserDefaults() // 1. UserDefaults에서 불러오기(테스트용)
         configureUI()
-       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,8 +59,9 @@ class MyPageViewController: UIViewController {
         setAppLogoToNavigationBar()
     }
     func setAppLogoToNavigationBar() {
+        
         let logoImageView = UIImageView(image: UIImage(named: "blacktube_applogo_black"))
-        logoImageView.frame = CGRect(x: 18, y: 3, width: 45, height: 31)
+        logoImageView.frame = CGRect(x: 20, y: 5, width: 40, height: 27)
         navigationBar.addSubview(logoImageView)
     }
     
@@ -80,6 +81,16 @@ class MyPageViewController: UIViewController {
         self.present(editProfileModalVC, animated: true, completion: nil)
     }
     
+    @IBAction func switchDarkMode(_ sender: Any) {
+        print("!@#!@#!@")
+        if self.traitCollection.userInterfaceStyle == .dark {
+            // 현재 다크 모드인 경우 라이트 모드로 변경
+            self.view.window?.overrideUserInterfaceStyle = .light
+        } else {
+            // 현재 라이트 모드인 경우 다크 모드로 변경
+            self.view.window?.overrideUserInterfaceStyle = .dark
+        }
+    }
     @IBAction func moveToEditProfileModal(_ sender: Any) {
         showEditProfileModal()
     }
