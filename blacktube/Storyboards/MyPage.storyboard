@@ -178,9 +178,8 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8J-Oa-TH0">
-                                <rect key="frame" x="343" y="103" width="50" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8J-Oa-TH0">
+                                <rect key="frame" x="246.66666666666663" y="82" width="49.333333333333371" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="moon" catalog="system">
                                     <color key="baseForegroundColor" red="0.96470588450000005" green="0.75686275960000005" blue="0.38823530080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -193,6 +192,8 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="f8J-Oa-TH0" firstAttribute="top" secondItem="Swv-Xg-f1m" secondAttribute="top" constant="-6.9999999999999858" id="12s-67-yXn"/>
+                            <constraint firstItem="Swv-Xg-f1m" firstAttribute="top" secondItem="f8J-Oa-TH0" secondAttribute="bottom" constant="-27.333333333333385" id="GAC-al-TOY"/>
                             <constraint firstItem="Swv-Xg-f1m" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="GBI-MN-GM6"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="7yN-IG-Oab" secondAttribute="bottom" constant="28" id="Hc8-id-dG9"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7yN-IG-Oab" secondAttribute="trailing" id="Mtg-fm-oKv"/>
@@ -202,6 +203,7 @@
                             <constraint firstItem="wlt-I6-n80" firstAttribute="top" secondItem="oR2-5D-kgg" secondAttribute="bottom" constant="19.666666666666686" id="Yap-5W-5yT"/>
                             <constraint firstItem="Swv-Xg-f1m" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="goB-Mb-6bq"/>
                             <constraint firstItem="ac8-Oa-OC5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="15" id="oWQ-pZ-j6a"/>
+                            <constraint firstItem="f8J-Oa-TH0" firstAttribute="leading" secondItem="Swv-Xg-f1m" secondAttribute="trailing" constant="-25" id="rzZ-SL-bpt"/>
                             <constraint firstItem="oR2-5D-kgg" firstAttribute="top" secondItem="Swv-Xg-f1m" secondAttribute="bottom" constant="24" id="xp5-Bh-7vh"/>
                             <constraint firstItem="7yN-IG-Oab" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xwG-QT-3gu"/>
                             <constraint firstItem="oR2-5D-kgg" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="zMr-qX-jhR"/>
@@ -214,6 +216,7 @@
                         <outlet property="likedVideosCollectionView" destination="7yN-IG-Oab" id="W07-nf-kbR"/>
                         <outlet property="logOutButton" destination="zJO-Qb-CFh" id="Dg6-Oi-pq6"/>
                         <outlet property="navigationBar" destination="eyO-vt-xpe" id="ny0-0K-kjU"/>
+                        <outlet property="switchDarkMode" destination="f8J-Oa-TH0" id="vvp-sk-o4X"/>
                         <outlet property="userEmailLabel" destination="2rk-2v-3kM" id="Hcx-30-FEw"/>
                         <outlet property="userImage" destination="Swv-Xg-f1m" id="6rn-ir-cWO"/>
                         <outlet property="userNameLabel" destination="79q-kE-R4f" id="mLM-x5-Ada"/>

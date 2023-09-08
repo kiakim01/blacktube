@@ -20,9 +20,9 @@ class MyPageViewController: UIViewController {
     @IBOutlet var editProfileButton: UIButton!
     @IBOutlet var logOutButton: UIButton!
 
-    @IBOutlet var switchDarkModeButton: UIButton!
     @IBOutlet var likedVideosCollectionView: UICollectionView!
     
+    @IBOutlet var switchDarkMode: UIButton!
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -82,12 +82,18 @@ class MyPageViewController: UIViewController {
     }
     
     @IBAction func switchDarkMode(_ sender: Any) {
-        print("!@#!@#!@")
         if self.traitCollection.userInterfaceStyle == .dark {
-            // 현재 다크 모드인 경우 라이트 모드로 변경
+            if let image = UIImage(systemName: "moon") {
+                let symbol = image.withTintColor(.systemOrange, renderingMode: .alwaysOriginal)
+                switchDarkMode.setImage(symbol, for: .normal)
+            }
+            
             self.view.window?.overrideUserInterfaceStyle = .light
         } else {
-            // 현재 라이트 모드인 경우 다크 모드로 변경
+            if let image = UIImage(systemName: "moon.fill") {
+                let symbol = image.withTintColor(.systemOrange, renderingMode: .alwaysOriginal)
+                switchDarkMode.setImage(symbol, for: .normal)
+            }
             self.view.window?.overrideUserInterfaceStyle = .dark
         }
     }
