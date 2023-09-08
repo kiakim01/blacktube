@@ -89,7 +89,6 @@ class MyPageViewController: UIViewController {
                 let symbol = image.withTintColor(.systemOrange, renderingMode: .alwaysOriginal)
                 switchDarkMode.setImage(symbol, for: .normal)
             }
-            
             self.view.window?.overrideUserInterfaceStyle = .light
         } else {
             if let image = UIImage(systemName: "moon.fill") {
@@ -98,6 +97,13 @@ class MyPageViewController: UIViewController {
             }
             self.view.window?.overrideUserInterfaceStyle = .dark
         }
+//        loginUser.isDarkMode.toggle()
+//        if let index = userData.firstIndex(where: { $0.Id == loginUser.Id }) {
+//            userData[index].isDarkMode = loginUser.isDarkMode
+//        }
+//        UserManager.shared.SaveLoginUser()
+//        UserManager.shared.SaveUserData()
+//        print("Darkmode is \(loginUser.isDarkMode)")
     }
     @IBAction func moveToEditProfileModal(_ sender: Any) {
         showEditProfileModal()

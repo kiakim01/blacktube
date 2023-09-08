@@ -58,6 +58,14 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         else if sender.tag == 1 {
             inputPW = sender.text ?? ""
         }
+        if inputID != "" && inputPW != "" {
+            LoginButton.backgroundColor = UIColor.systemBlue
+            LoginButton.isUserInteractionEnabled = true
+        }
+        else {
+            LoginButton.backgroundColor = UIColor.gray
+            LoginButton.isUserInteractionEnabled = false
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -181,7 +189,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 extension LoginPage{
     func configureUI(){
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.systemBackground
         self.view.addSubview(mainImage)
         self.view.addSubview(UserInfoArea)
         UserInfoArea.addSubview(UserInfotableView)

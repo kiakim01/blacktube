@@ -148,7 +148,8 @@ extension SignUpPage{
     
     func configureUI(){
         //다크모드 고려필요
-        view.backgroundColor = UIColor.white
+//        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.systemBackground
         self.view.addSubview(InfoLabel)
         self.view.addSubview(UserInfoArea)
         UserInfoArea.addSubview(UserInfotableView)

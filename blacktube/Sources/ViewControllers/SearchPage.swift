@@ -39,7 +39,8 @@ class SearchPage: UIViewController {
     let searchTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "BlackTube 검색"
-        textField.backgroundColor = UIColor(hex: "edede9")
+//        textField.backgroundColor = UIColor(hex: "edede9")
+        textField.backgroundColor = UIColor.systemGray5
         textField.layer.cornerRadius = 10
         
         let placeholderPadding = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
