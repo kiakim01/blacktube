@@ -21,11 +21,11 @@ class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     var data:[SignUpList] = [
-        SignUpList(id:0, title: "ID", placeHolder: "ID를 입력해주세요", condition: "^[a-zA-Z0-9]{3,}$",pass: false, inputValue:"", isSecure: false),
-        SignUpList(id:1,title: "Password", placeHolder: "비밀번호를 입력해주세요", condition:"^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: true),
-        SignUpList(id:2,title: "Password check", placeHolder: "비밀번호를 다시 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false ,inputValue:"", isSecure: true),
-        SignUpList(id:3,title: "Name", placeHolder: "이름을 입력해주   세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: false ),
-        SignUpList(id:4,title: "E-mail", placeHolder: "이메일을 입력해주세요", condition: "^[a-zA-Z0-9_+.-]+@[a-zA-Z0-9.-]+$",pass: false ,inputValue:"", isSecure: false)
+        SignUpList(id:0, title: "ID", placeHolder: "ID(3자이상)를 입력해주세요", condition: "^[a-zA-Z0-9]{3,}$",pass: false, inputValue:"", isSecure: false),
+        SignUpList(id:1,title: "Password", placeHolder: "PW(5자이상)를 입력해주세요", condition:"^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: true),
+        SignUpList(id:2,title: "Password check", placeHolder: "PW를 다시 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false ,inputValue:"", isSecure: true),
+        SignUpList(id:3,title: "Name", placeHolder: "이름(5자이상)을 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: false ),
+        SignUpList(id:4,title: "E-mail", placeHolder: "이메일(@포함)을 입력해주세요", condition: "^[a-zA-Z0-9_+.-]+@[a-zA-Z0-9.-]+$",pass: false ,inputValue:"", isSecure: false)
     ]
     
     let InfoLabel : UILabel = {
@@ -130,7 +130,7 @@ extension SignUpPage{
             
         }
         else {
-            let alert = UIAlertController(title: "확인해주세요", message: "입력되지 않은 정보가 있습니다.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "확인해주세요", message: "조건이 만족되지 않은 정보가 있습니다.", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .cancel){(cancle)in}
             alert.addAction(confirmAction)
             self.present(alert, animated: true, completion: nil)

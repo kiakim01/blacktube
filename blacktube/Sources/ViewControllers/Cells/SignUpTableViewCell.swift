@@ -78,12 +78,22 @@ extension SignUpCustomCell {
     
     
     @objc func textFieldCheck() {
+        checkIcon.isHidden = false
         let inputValue = userInput.text
+        if inputValue == "" {
+            checkIcon.isHidden = true
+        }
         let pass = isValid(str: inputValue  ?? "", condition: condition)
         if pass {
-            checkIcon.isHidden = false
+            checkIcon.image = UIImage(systemName: "checkmark.circle")
+            checkIcon.tintColor = .systemBlue
             inputValueHandler?(inputValue ?? "")
             
+        }
+        else {
+            checkIcon.image = UIImage(systemName: "xmark.circle")
+            checkIcon.tintColor = .systemRed
+//            checkIcon.isHidden = true
         }
         passHandler?(pass)
     }
