@@ -112,30 +112,58 @@ extension SignUpPage{
         if allPass {
             let id = data[0].inputValue
             let pw = data[1].inputValue
+            let pwCheck = data[2].inputValue
             let name = data[3].inputValue
             let email = data[4].inputValue
             
+            // 중복ID와 비밀번호재입력이 일치하지 않는 경우를 위한 ErrorCase
+            enum ErrorCase {
+                case Overap
+                case PasswordIssue
+            }
+            var error: ErrorCase?
+            for users in userData {
+                if users.Id == id {
+                    error = .Overap
+                    break
+                }
+            }
+            if pw != pwCheck {
+                error = .PasswordIssue
+            }
             //userData 저장
-            let addUserData = User (Id: id, password: pw, userName: name, userEmail: email)
-            userData.append(addUserData)
-            //useDefalut 저장
-//            UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: addUserData.Id)
-            UserManager.shared.SaveUserData()
-
-            //navigation
-            self.navigationController?.popViewController(animated: true)
-            
-//            let loginPage = LoginPage()
-//            self.present(loginPage, animated: true)
-            
+            if error == nil{
+                let addUserData = User (Id: id, password: pw, userName: name, userEmail: email)
+                userData.append(addUserData)
+                //useDefalut 저장
+                //            UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: addUserData.Id)
+                UserManager.shared.SaveUserData()
+                
+                //navigation
+                self.navigationController?.popViewController(animated: true)
+                
+                //            let loginPage = LoginPage()
+                //            self.present(loginPage, animated: true)
+            }
+            else if error == .Overap {
+                ShowAlert("이미 존재하는 ID입니다.")
+            }
+            else if error == .PasswordIssue{
+                ShowAlert("비밀번호가 일치하지 않습니다.")
+            }
         }
         else {
-            let alert = UIAlertController(title: "확인해주세요", message: "조건이 만족되지 않은 정보가 있습니다.", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "확인", style: .cancel){(cancle)in}
-            alert.addAction(confirmAction)
-            self.present(alert, animated: true, completion: nil)
+            ShowAlert("조건이 만족되지 않은 정보가 있습니다.")
         }
     }
+    
+    func ShowAlert(_ message: String) {
+        let alert = UIAlertController(title: "확인해주세요", message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .cancel){(cancle)in}
+        alert.addAction(confirmAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func isValid(str:String, condition:String) -> Bool {
         let RegEx = condition
         let Test = NSPredicate(format:"SELF MATCHES %@", RegEx)
