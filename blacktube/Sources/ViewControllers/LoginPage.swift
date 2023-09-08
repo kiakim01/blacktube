@@ -93,7 +93,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(UIColor.gray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.addTarget(self, action: #selector(signUpButtonClick), for: .touchUpInside)
+     
       return button
     }()
     
@@ -102,11 +102,10 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         button.setTitle("로그인하기", for: .normal)
         button.backgroundColor = UIColor.gray
         button.layer.cornerRadius = 20
-        button.addTarget(self, action: #selector(LoginButtonClick), for: .touchUpInside)
         return button
     }()
     
-    //Navi
+    //navigation
     @objc func signUpButtonClick(){
             let signUpPageVC = SignUpPage()
         self.navigationController?.pushViewController(signUpPageVC, animated: true)
@@ -169,9 +168,8 @@ extension LoginPage{
         UserInfotableView.separatorStyle = .none
         self.view.addSubview(LoginButton)
         self.view.addSubview(goToSignUpButton)
-      
-        
-        
+        goToSignUpButton.addTarget(self, action: #selector(signUpButtonClick), for: .touchUpInside)
+        LoginButton.addTarget(self, action: #selector(LoginButtonClick), for: .touchUpInside)
       
     
     }

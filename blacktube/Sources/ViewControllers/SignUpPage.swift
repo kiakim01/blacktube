@@ -60,50 +60,6 @@ class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource 
         configureUI()
         setLayout()
     }
-    
-    func configureUI(){
-        //다크모드 고려필요
-        view.backgroundColor = UIColor.white
-        self.view.addSubview(InfoLabel)
-        self.view.addSubview(UserInfoArea)
-        UserInfoArea.addSubview(UserInfotableView)
-        UserInfotableView.delegate = self
-        UserInfotableView.dataSource = self
-        UserInfotableView.separatorStyle = .none
-        self.view.addSubview(signUpButton)
-        signUpButton.addTarget(self, action: #selector(submitInput), for: .touchUpInside)
-        
-    }
-    
-    func setLayout(){
-        InfoLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([InfoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                                     InfoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
-                                    ])
-        
-        UserInfoArea.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([UserInfoArea.topAnchor.constraint(equalTo: InfoLabel.bottomAnchor,constant: 20),
-                                     UserInfoArea.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10),
-                                     UserInfoArea.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -10),
-                                     UserInfoArea.bottomAnchor.constraint(equalTo: signUpButton.topAnchor,constant: -20)
-                                     
-                                    ])
-        UserInfotableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            UserInfotableView.topAnchor.constraint(equalTo: UserInfoArea.topAnchor,constant: 30),
-            UserInfotableView.bottomAnchor.constraint(equalTo: UserInfoArea.bottomAnchor),
-            UserInfotableView.leftAnchor.constraint(equalTo: UserInfoArea.leftAnchor),
-            UserInfotableView.rightAnchor.constraint(equalTo: UserInfoArea.rightAnchor)
-            
-        ])
-        signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([signUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -50),
-                                     signUpButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-                                     signUpButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-                                     signUpButton.heightAnchor.constraint(equalToConstant: 70)
-                                    ])
-    }
-    
 }
 
 //MARK: Method
@@ -148,14 +104,6 @@ extension SignUpPage{
         return 70
     }
     
-    
-//    func sum (left A:Int,right B:Int) -> Int{
-//       let result = A + B
-//        return result
-//    }
-//
-    
-    
     @objc func submitInput(_ sender:UITextField){
         let allPass = data.allSatisfy { item in
             return item.pass
@@ -172,20 +120,11 @@ extension SignUpPage{
             userData.append(addUserData)
             //useDefalut 저장
             UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: addUserData.Id)
-            
-            print("userData:", userData)
-            
+
+            //navigation
             let loginPage = LoginPage()
-            //            self.navigationController?.pushViewController(loginPage, animated: true)
             self.present(loginPage, animated: true)
             
-            
-          
-//            print("!!",data[0].pass)
-//            print(data[1].pass)
-//            print(data[2].pass)
-//            print(data[3].pass)
-//            print(data[4].pass)
         }
         else {
             let alert = UIAlertController(title: "확인해주세요", message: "입력되지 않은 정보가 있습니다.", preferredStyle: .alert)
@@ -199,4 +138,52 @@ extension SignUpPage{
         let Test = NSPredicate(format:"SELF MATCHES %@", RegEx)
         return Test.evaluate(with: str)
     }
+}
+
+//MARK: UI
+extension SignUpPage{
+    
+    func configureUI(){
+        //다크모드 고려필요
+        view.backgroundColor = UIColor.white
+        self.view.addSubview(InfoLabel)
+        self.view.addSubview(UserInfoArea)
+        UserInfoArea.addSubview(UserInfotableView)
+        UserInfotableView.delegate = self
+        UserInfotableView.dataSource = self
+        UserInfotableView.separatorStyle = .none
+        self.view.addSubview(signUpButton)
+        signUpButton.addTarget(self, action: #selector(submitInput), for: .touchUpInside)
+        
+    }
+    
+    func setLayout(){
+        InfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([InfoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                                     InfoLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
+                                    ])
+        
+        UserInfoArea.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([UserInfoArea.topAnchor.constraint(equalTo: InfoLabel.bottomAnchor,constant: 20),
+                                     UserInfoArea.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10),
+                                     UserInfoArea.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -10),
+                                     UserInfoArea.bottomAnchor.constraint(equalTo: signUpButton.topAnchor,constant: -20)
+                                     
+                                    ])
+        UserInfotableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            UserInfotableView.topAnchor.constraint(equalTo: UserInfoArea.topAnchor,constant: 30),
+            UserInfotableView.bottomAnchor.constraint(equalTo: UserInfoArea.bottomAnchor),
+            UserInfotableView.leftAnchor.constraint(equalTo: UserInfoArea.leftAnchor),
+            UserInfotableView.rightAnchor.constraint(equalTo: UserInfoArea.rightAnchor)
+            
+        ])
+        signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([signUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -50),
+                                     signUpButton.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+                                     signUpButton.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+                                     signUpButton.heightAnchor.constraint(equalToConstant: 70)
+                                    ])
+    }
+    
 }

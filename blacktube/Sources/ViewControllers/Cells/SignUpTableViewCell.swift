@@ -10,14 +10,14 @@ import UIKit
 
 
 class  SignUpCustomCell : UITableViewCell{
-    //bring VC data
-    var condition = ""
     
-    //클로져[1] 선언 타입 지정!!!
+    //MARK: property
+    
+    var condition = ""
     var passHandler:((Bool)->Void)?
     var inputValueHandler:((String)->Void)?
     
-    //MARK: property
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -49,9 +49,7 @@ class  SignUpCustomCell : UITableViewCell{
     }()
     
     
-    //customCell을 만들때 작성하는 형식으로, 초기화 과정을 다루고 있음
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        //셀의 스타일과, 재사용 식별자를 매개변수로 받고 있음.
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
         setLayout()
@@ -63,8 +61,7 @@ class  SignUpCustomCell : UITableViewCell{
         
     }
     override func layoutSubviews() {
-        // 테이블 뷰 셀 사이의 간격
-        super.layoutSubviews()
+       super.layoutSubviews()
         
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0))
     }
@@ -72,10 +69,7 @@ class  SignUpCustomCell : UITableViewCell{
     
     
     required init?(coder: NSCoder) {
-        //1번: 스토리보드에서 셀을 초기화 하지 않도록 강제(스토리보드를 사용하지 않았음으로 1번 코드 채택)
         fatalError("init(coder:) has not been implemented")
-        //2번 :super.init을 호출해서 셀을 초기화 할수있도록 함.
-        //        super.init(coder: coder)
     }
 }
 
@@ -88,9 +82,6 @@ extension SignUpCustomCell {
         let pass = isValid(str: inputValue  ?? "", condition: condition)
         if pass {
             checkIcon.isHidden = false
-            //userInput에 저장된 내용을 VC에 보내줘야함
-            print("cell text 확인:",inputValue ?? "")
-            //클로져[2]실행(파라미터)
             inputValueHandler?(inputValue ?? "")
             
         }
