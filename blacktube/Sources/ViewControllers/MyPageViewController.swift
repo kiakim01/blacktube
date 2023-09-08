@@ -136,12 +136,15 @@ extension MyPageViewController: UICollectionViewDataSource {
             cell.channelLabel.isHidden = true
             cell.viewCountLabel.isHidden = true
             cell.plusButton.isHidden = false
+            cell.backgroundColor = UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.00)
         } else {
             cell.thumbnailImage.isHidden = false
             cell.titleLabel.isHidden = false
             cell.channelLabel.isHidden = false
             cell.viewCountLabel.isHidden = false
             cell.plusButton.isHidden = true
+            cell.backgroundColor = UIColor(red: 0.14, green: 0.14, blue: 0.14, alpha: 1.00)
+            
             let video = likedVideos[indexPath.item]
             cell.configure(video)
         }
