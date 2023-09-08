@@ -17,15 +17,15 @@ class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource 
         let condition: String
         var pass : Bool
         var inputValue : String
-        let celltype : Celltype
+        let isSecure : Bool
     }
     
     var data:[SignUpList] = [
-        SignUpList(id:0, title: "ID", placeHolder: "ID를 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", celltype: .id),
-        SignUpList(id:1,title: "Password", placeHolder: "비밀번호를 입력해주세요", condition:"^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", celltype: .password),
-        SignUpList(id:2,title: "Password\ncheck", placeHolder: "비밀번호를 다시 입력해주세요", condition: "^[a-zA-Z0-9]{8,16}$",pass: false ,inputValue:"", celltype: .password),
-        SignUpList(id:3,title: "Name", placeHolder: "이름을 입력해주   세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", celltype: .name ),
-        SignUpList(id:4,title: "E-mail", placeHolder: "이메일을 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false ,inputValue:"", celltype: .email)
+        SignUpList(id:0, title: "ID", placeHolder: "ID를 입력해주세요", condition: "^[a-zA-Z0-9]{3,}$",pass: false, inputValue:"", isSecure: false),
+        SignUpList(id:1,title: "Password", placeHolder: "비밀번호를 입력해주세요", condition:"^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: true),
+        SignUpList(id:2,title: "Password check", placeHolder: "비밀번호를 다시 입력해주세요", condition: "^[a-zA-Z0-9]{8,16}$",pass: false ,inputValue:"", isSecure: true),
+        SignUpList(id:3,title: "Name", placeHolder: "이름을 입력해주   세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: false ),
+        SignUpList(id:4,title: "E-mail", placeHolder: "이메일을 입력해주세요", condition: "^[a-zA-Z0-9_+.-]+@[a-zA-Z0-9.-]+$",pass: false ,inputValue:"", isSecure: false)
     ]
     
     let InfoLabel : UILabel = {
@@ -51,7 +51,9 @@ class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource 
         button.backgroundColor = UIColor.gray
         button.layer.cornerRadius = 20
         return button
+        
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +62,8 @@ class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func configureUI(){
+        //다크모드 고려필요
+        view.backgroundColor = UIColor.white
         self.view.addSubview(InfoLabel)
         self.view.addSubview(UserInfoArea)
         UserInfoArea.addSubview(UserInfotableView)
@@ -115,9 +119,19 @@ extension SignUpPage{
         
         cell.titleLabel.text = signUpList.title
         cell.userInput.placeholder = signUpList.placeHolder
-        cell.userInput.addTarget(self, action: #selector(checkValue), for: .editingChanged)
+        
+        cell.passHandler = {[weak self] pass in
+            self?.data[indexPath.row].pass = pass
+            
+        }
         cell.userInput.tag = indexPath.row
         cell.checkIcon.isHidden = true
+        cell.condition = signUpList.condition
+        
+        if signUpList.isSecure {
+            cell.userInput.isSecureTextEntry = true
+        }
+        
         return cell
     }
     
@@ -126,14 +140,6 @@ extension SignUpPage{
     }
     
     
-    @objc func checkValue(_ sender: UITextField, forCell cell:SignUpCustomCell) {
-        let text = sender.text
-        let spellCount = text?.count
-        if spellCount ?? 0 >= 5 {
-            data[sender.tag].inputValue = text ?? ""
-            data[sender.tag].pass = true
-        }
-    }
     
     @objc func submitInput(_ sender:UITextField){
         let allPass = data.allSatisfy { item in
@@ -152,8 +158,14 @@ extension SignUpPage{
             //useDefalut 저장
             UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: addUserData.Id)
             
-            print("Check:",userData)
-           
+            let loginPage = LoginPage()
+            //            self.navigationController?.pushViewController(loginPage, animated: true)
+            self.present(loginPage, animated: true)
+//            print("!!",data[0].pass)
+//            print(data[1].pass)
+//            print(data[2].pass)
+//            print(data[3].pass)
+//            print(data[4].pass)
         }
         else {
             let alert = UIAlertController(title: "확인해주세요", message: "입력되지 않은 정보가 있습니다.", preferredStyle: .alert)
@@ -161,5 +173,10 @@ extension SignUpPage{
             alert.addAction(confirmAction)
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    func isValid(str:String, condition:String) -> Bool {
+        let RegEx = condition
+        let Test = NSPredicate(format:"SELF MATCHES %@", RegEx)
+        return Test.evaluate(with: str)
     }
 }
