@@ -24,8 +24,8 @@ extension User: Equatable {
 
 //로그인페이지 확인용 더미데이터
 var guest = User(Id: "Guest", password: "0000", userName: "Guest", userEmail: "none")
-var user1 = User(Id: "lcho3878", password: "102030", userName: "이찬호", userEmail: "leech3878@naver.com")
-var user2 = User(Id: "leech3878", password: "124578", userName: "찬호", userEmail: "leech3878@google.com")
+var user1 = User(Id: "test1", password: "test1", userName: "testuser1", userEmail: "testuser1@google.com")
+var user2 = User(Id: "test2", password: "test2", userName: "testuser2", userEmail: "testuser2@google.com")
 var userData: [User] = [user1, user2]
 var loginUser = guest
 
