@@ -10,6 +10,7 @@ import AVFoundation
 
 class LikePageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet var navigationBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
     
     var videos: [Video] = []
@@ -23,7 +24,7 @@ class LikePageViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setAppLogoToNavigationBar()
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -62,6 +63,12 @@ class LikePageViewController: UIViewController, UITableViewDataSource, UITableVi
         
         return cell
     }
+    
+    func setAppLogoToNavigationBar() {
+        let logoImageView = UIImageView(image: UIImage(named: "blacktube_applogo_black"))
+        logoImageView.frame = CGRect(x: 20, y: 5, width: 40, height: 27)
+        navigationBar.addSubview(logoImageView)
+    }
 }
 
 class CustomVideoCell: UITableViewCell {
@@ -72,3 +79,8 @@ class CustomVideoCell: UITableViewCell {
     
 }
 
+extension LikePageViewController: UINavigationBarDelegate {
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
+    }
+}

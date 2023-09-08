@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Like-->
+        <!--좋아요-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="LikePageViewController" customModule="blacktube" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,15 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gB-qA-pC6">
-                                <rect key="frame" x="0.0" y="50" width="393" height="44"/>
-                                <color key="barTintColor" systemColor="systemBackgroundColor"/>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gB-qA-pC6">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="1N8-n7-pJA"/>
+                                    <navigationItem id="1N8-n7-pJA"/>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2hl-G1-qFq">
-                                <rect key="frame" x="0.0" y="94" width="393" height="675"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="675"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="videoCell" id="5vc-rx-pJV" customClass="CustomVideoCell" customModule="blacktube" customModuleProvider="target">
@@ -99,16 +98,17 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7gB-qA-pC6" secondAttribute="trailing" id="G12-FZ-S3W"/>
                             <constraint firstItem="2hl-G1-qFq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Nx8-Dd-lHY"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2hl-G1-qFq" secondAttribute="trailing" id="V6M-Gj-jo0"/>
-                            <constraint firstItem="2hl-G1-qFq" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="Vnm-MT-Uwo"/>
-                            <constraint firstItem="7gB-qA-pC6" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="50" id="dLL-8g-zkA"/>
+                            <constraint firstItem="2hl-G1-qFq" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="9" id="Vnm-MT-Uwo"/>
+                            <constraint firstItem="7gB-qA-pC6" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="59" id="dLL-8g-zkA"/>
                             <constraint firstItem="7gB-qA-pC6" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="mRV-W7-MNg"/>
                             <constraint firstItem="7gB-qA-pC6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ojt-jh-qMd"/>
                             <constraint firstItem="2hl-G1-qFq" firstAttribute="top" secondItem="7gB-qA-pC6" secondAttribute="bottom" id="ood-O3-Lo5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Like" id="pHa-fg-d5H"/>
+                    <tabBarItem key="tabBarItem" title="좋아요" image="heart" catalog="system" id="pHa-fg-d5H"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="navigationBar" destination="7gB-qA-pC6" id="cPR-LE-9u6"/>
                         <outlet property="tableView" destination="2hl-G1-qFq" id="uw5-B8-2oO"/>
                     </connections>
                 </viewController>
@@ -128,6 +128,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

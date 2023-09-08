@@ -25,6 +25,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var viewMoreButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     @IBAction func ViewMore(_ sender: Any) {
         viewMoreButton.isHidden = true
@@ -132,5 +133,9 @@ class DetailViewController: UIViewController {
         let youtubeRequest = URLRequest(url: myURL!)
         videoView.load(youtubeRequest)
     }
-
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }

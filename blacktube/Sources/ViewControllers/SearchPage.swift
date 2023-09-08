@@ -9,6 +9,8 @@ import UIKit
 
 class SearchPage: UIViewController {
     
+    @IBOutlet var navigationBar: UINavigationBar!
+    
     @IBOutlet weak var searchTableView: UITableView!
     var searchVideos: [Video] = []
     var searchIndex: [Int] = []
@@ -28,9 +30,9 @@ class SearchPage: UIViewController {
     
     let searchIcon : UIImageView = {
         let icon = UIImageView()
-        icon.image = UIImage(systemName: "magnifyingglass")
-        //        icon.backgroundColor = UIColor.red
-        icon.tintColor = UIColor.gray
+//        icon.image = UIImage(systemName: "magnifyingglass")
+//        icon.backgroundColor = UIColor.red
+//        icon.tintColor = UIColor.gray
         return icon
     }()
     
@@ -52,17 +54,17 @@ class SearchPage: UIViewController {
     
     let micBox : UIView = {
         let micBox = UIView()
-        micBox.backgroundColor = UIColor(hex: "edede9")
-        micBox.layer.cornerRadius = 20
-        micBox.layer.masksToBounds = true
+//        micBox.backgroundColor = UIColor(hex: "edede9")
+//        micBox.layer.cornerRadius = 20
+//        micBox.layer.masksToBounds = true
         return micBox
     }()
     
     let micIcon : UIImageView = {
         let icon = UIImageView()
-        icon.image = UIImage(systemName: "mic.fill")
+//        icon.image = UIImage(systemName: "mic.fill")
 //        icon.backgroundColor = UIColor.red
-        icon.tintColor = UIColor.black
+//        icon.tintColor = UIColor.black
         return icon
     }()
     
@@ -82,6 +84,7 @@ class SearchPage: UIViewController {
 
 extension SearchPage{
     func configureUI(){
+        setAppLogoToNavigationBar()
         view.addSubview(searchBox)
         searchBox.addSubview(searchIcon)
         searchBox.addSubview(micBox)
@@ -91,9 +94,9 @@ extension SearchPage{
     func setLayout(){
         searchBox.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            searchBox.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10),
+            searchBox.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 35),
             searchBox.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -10),
-            searchBox.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -20),
+            searchBox.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: -5),
             searchBox.heightAnchor.constraint(equalToConstant: 50)
         ])
         
@@ -191,5 +194,17 @@ extension SearchPage: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
+    }
+    
+    func setAppLogoToNavigationBar() {
+        let logoImageView = UIImageView(image: UIImage(named: "blacktube_applogo_black"))
+        logoImageView.frame = CGRect(x: 20, y: 5, width: 40, height: 27)
+        navigationBar.addSubview(logoImageView)
+    }
+}
+
+extension SearchPage: UINavigationBarDelegate {
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
     }
 }

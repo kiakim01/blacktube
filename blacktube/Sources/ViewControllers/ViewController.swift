@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet var navigationBar: UINavigationBar!
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -18,6 +20,7 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        setAppLogoToNavigationBar()
         fetchYoutubeData()
     }
     
@@ -67,6 +70,12 @@ class ViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }.resume()
+    }
+    
+    func setAppLogoToNavigationBar() {
+        let logoImageView = UIImageView(image: UIImage(named: "blacktube_applogo_black"))
+        logoImageView.frame = CGRect(x: 20, y: 5, width: 40, height: 27)
+        navigationBar.addSubview(logoImageView)
     }
 }
 
@@ -135,5 +144,11 @@ extension ViewController: UITableViewDelegate {
                 }
             }
         }
+    }
+}
+
+extension ViewController: UINavigationBarDelegate {
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
     }
 }
