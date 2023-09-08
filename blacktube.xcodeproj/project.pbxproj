@@ -36,6 +36,7 @@
 		E76480492AA609B900E98C07 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E76480482AA609B900E98C07 /* .gitignore */; };
 		E764804E2AA6B67100E98C07 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764804D2AA6B67100E98C07 /* MyPageViewController.swift */; };
 		E76480562AA6CCDD00E98C07 /* LikedVideosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76480552AA6CCDD00E98C07 /* LikedVideosCollectionViewCell.swift */; };
+		E7FA1C282AAAE7D7004CF890 /* EditProfilePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7FA1C272AAAE7D7004CF890 /* EditProfilePage.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		E76480482AA609B900E98C07 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E764804D2AA6B67100E98C07 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		E76480552AA6CCDD00E98C07 /* LikedVideosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedVideosCollectionViewCell.swift; sourceTree = "<group>"; };
+		E7FA1C272AAAE7D7004CF890 /* EditProfilePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditProfilePage.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				E7280BC72AA5FDE800D30303 /* DetailPage.storyboard */,
 				E7280BC92AA5FDF600D30303 /* LikePage.storyboard */,
 				E7280BCB2AA5FE0100D30303 /* MyPage.storyboard */,
+				E7FA1C272AAAE7D7004CF890 /* EditProfilePage.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				E7280BAC2AA5FA8500D30303 /* Main.storyboard in Resources */,
 				E7280BC82AA5FDE800D30303 /* DetailPage.storyboard in Resources */,
 				E7280BC22AA5FDA700D30303 /* SearchPage.storyboard in Resources */,
+				E7FA1C282AAAE7D7004CF890 /* EditProfilePage.storyboard in Resources */,
 				E7280BC62AA5FDDD00D30303 /* SignUpPage.storyboard in Resources */,
 				E7280BCA2AA5FDF600D30303 /* LikePage.storyboard in Resources */,
 				E7280BC42AA5FDC400D30303 /* LoginPage.storyboard in Resources */,
@@ -277,9 +281,9 @@
 				E7280BA52AA5FA8500D30303 /* AppDelegate.swift in Sources */,
 				153F30942AA9C4FA00CCC8F9 /* LoginTableViewCell.swift in Sources */,
 				D142EEC92AA60CB000F5CF9A /* MainTableViewCell.swift in Sources */,
-	            E76480562AA6CCDD00E98C07 /* LikedVideosCollectionViewCell.swift in Sources */,
-                96546FA92AA8C359008CABFA /* UserDefaults.swift in Sources */,
-                E713076F2AA992CF00473563 /* User.swift in Sources */,
+				E76480562AA6CCDD00E98C07 /* LikedVideosCollectionViewCell.swift in Sources */,
+				96546FA92AA8C359008CABFA /* UserDefaults.swift in Sources */,
+				E713076F2AA992CF00473563 /* User.swift in Sources */,
 				969B03AA2AA702D60071084E /* UIcolor+CALayer.swift in Sources */,
 				153F30862AA6F29A00CCC8F9 /* DetailViewController.swift in Sources */,
 				E7280BA72AA5FA8500D30303 /* SceneDelegate.swift in Sources */,

@@ -16,7 +16,8 @@ class LikedVideosCollectionViewCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var channelLabel: UILabel!
     @IBOutlet var viewCountLabel: UILabel!
-
+    @IBOutlet var plusButton: UILabel!
+    
     // MARK: - Methods
     
     func configure(_ video: Video) {
@@ -33,7 +34,7 @@ class LikedVideosCollectionViewCell: UICollectionViewCell {
         channelLabel.text = video.channelTitle
         viewCountLabel.text = "\(video.viewCount) views"
     }
-
+    
 }
 
 
