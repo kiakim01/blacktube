@@ -20,27 +20,33 @@ class MainTableViewCell: UITableViewCell {
         let index = sender.tag
         let video = videos[index]
         
-        if !likedVideos.contains(video) {
-            likedVideos.append(video)
+        if !loginUser.likedVideos.contains(video) {
+            loginUser.likedVideos.append(video)
         }
         else {
-            for i in 0..<likedVideos.count {
-                if likedVideos[i] == video {
-                    likedVideos.remove(at: i)
+            for i in 0..<loginUser.likedVideos.count {
+                if loginUser.likedVideos[i] == video {
+                    loginUser.likedVideos.remove(at: i)
                     break
                 }
             }
         }
-        
-        videos[index].isLiked.toggle()
-        
-        if videos[index].isLiked {
-            let filledHeart = UIImage(systemName: "heart.fill")?.imageWithColor(color: UIColor.red)
-            sender.setImage(filledHeart, for: .normal)
-        } else {
-            let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
-            sender.setImage(heart, for: .normal)
+        if let index = userData.firstIndex(where: { $0.Id == loginUser.Id }) {
+            userData[index].likedVideos = loginUser.likedVideos
         }
+        UserManager.shared.SaveLoginUser()
+        UserManager.shared.SaveUserData()
+        
+        
+//        videos[index].isLiked.toggle()
+        
+//        if videos[index].isLiked {
+//            let filledHeart = UIImage(systemName: "heart.fill")?.imageWithColor(color: UIColor.red)
+//            sender.setImage(filledHeart, for: .normal)
+//        } else {
+//            let heart = UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray)
+//            sender.setImage(heart, for: .normal)
+//        }
     }
     
     override func awakeFromNib() {

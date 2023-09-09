@@ -39,7 +39,8 @@ class SearchPage: UIViewController {
     let searchTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "BlackTube 검색"
-        textField.backgroundColor = UIColor(hex: "edede9")
+//        textField.backgroundColor = UIColor(hex: "edede9")
+        textField.backgroundColor = UIColor.systemGray5
         textField.layer.cornerRadius = 10
         
         let placeholderPadding = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
@@ -163,22 +164,28 @@ extension SearchPage: UITableViewDelegate, UITableViewDataSource {
     
     @objc func ClickButton (_ sender: UIButton) {
         let video = videos[sender.tag]
-        if !likedVideos.contains(video) {
-            likedVideos.append(video)
+        if !loginUser.likedVideos.contains(video) {
+            loginUser.likedVideos.append(video)
             sender.tintColor = .red
             sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         }
         else {
-            for i in 0..<likedVideos.count {
-                if likedVideos[i] == video {
-                    likedVideos.remove(at: i)
+            for i in 0..<loginUser.likedVideos.count {
+                if loginUser.likedVideos[i] == video {
+                    loginUser.likedVideos.remove(at: i)
                     break
                 }
             }
             sender.tintColor = .gray
             sender.setImage(UIImage(systemName: "heart"), for: .normal)
         }
-        videos[sender.tag].isLiked.toggle()
+        if let index = userData.firstIndex(where: { $0.Id == loginUser.Id }) {
+            userData[index].likedVideos = loginUser.likedVideos
+        }
+        UserManager.shared.SaveLoginUser()
+        UserManager.shared.SaveUserData()
+        
+//        videos[sender.tag].isLiked.toggle()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

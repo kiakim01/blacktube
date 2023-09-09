@@ -21,11 +21,11 @@ class SignUpPage:  UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     var data:[SignUpList] = [
-        SignUpList(id:0, title: "ID", placeHolder: "ID를 입력해주세요", condition: "^[a-zA-Z0-9]{3,}$",pass: false, inputValue:"", isSecure: false),
-        SignUpList(id:1,title: "Password", placeHolder: "비밀번호를 입력해주세요", condition:"^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: true),
-        SignUpList(id:2,title: "Password check", placeHolder: "비밀번호를 다시 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false ,inputValue:"", isSecure: true),
-        SignUpList(id:3,title: "Name", placeHolder: "이름을 입력해주   세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: false ),
-        SignUpList(id:4,title: "E-mail", placeHolder: "이메일을 입력해주세요", condition: "^[a-zA-Z0-9_+.-]+@[a-zA-Z0-9.-]+$",pass: false ,inputValue:"", isSecure: false)
+        SignUpList(id:0, title: "ID", placeHolder: "ID(3자이상)를 입력해주세요", condition: "^[a-zA-Z0-9]{3,}$",pass: false, inputValue:"", isSecure: false),
+        SignUpList(id:1,title: "Password", placeHolder: "PW(5자이상)를 입력해주세요", condition:"^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: true),
+        SignUpList(id:2,title: "Password check", placeHolder: "PW를 다시 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false ,inputValue:"", isSecure: true),
+        SignUpList(id:3,title: "Name", placeHolder: "이름(5자이상)을 입력해주세요", condition: "^[a-zA-Z0-9]{5,}$",pass: false, inputValue:"", isSecure: false ),
+        SignUpList(id:4,title: "E-mail", placeHolder: "이메일(@포함)을 입력해주세요", condition: "^[a-zA-Z0-9_+.-]+@[a-zA-Z0-9.-]+$",pass: false ,inputValue:"", isSecure: false)
     ]
     
     let InfoLabel : UILabel = {
@@ -112,27 +112,58 @@ extension SignUpPage{
         if allPass {
             let id = data[0].inputValue
             let pw = data[1].inputValue
+            let pwCheck = data[2].inputValue
             let name = data[3].inputValue
             let email = data[4].inputValue
             
+            // 중복ID와 비밀번호재입력이 일치하지 않는 경우를 위한 ErrorCase
+            enum ErrorCase {
+                case Overap
+                case PasswordIssue
+            }
+            var error: ErrorCase?
+            for users in userData {
+                if users.Id == id {
+                    error = .Overap
+                    break
+                }
+            }
+            if pw != pwCheck {
+                error = .PasswordIssue
+            }
             //userData 저장
-            let addUserData = User (Id: id, password: pw, userName: name, userEmail: email)
-            userData.append(addUserData)
-            //useDefalut 저장
-            UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: addUserData.Id)
-
-            //navigation
-            let loginPage = LoginPage()
-            self.present(loginPage, animated: true)
-            
+            if error == nil{
+                let addUserData = User (Id: id, password: pw, userName: name, userEmail: email)
+                userData.append(addUserData)
+                //useDefalut 저장
+                //            UserDefaults.standard.set(try? JSONEncoder().encode(userData), forKey: addUserData.Id)
+                UserManager.shared.SaveUserData()
+                
+                //navigation
+                self.navigationController?.popViewController(animated: true)
+                
+                //            let loginPage = LoginPage()
+                //            self.present(loginPage, animated: true)
+            }
+            else if error == .Overap {
+                ShowAlert("이미 존재하는 ID입니다.")
+            }
+            else if error == .PasswordIssue{
+                ShowAlert("비밀번호가 일치하지 않습니다.")
+            }
         }
         else {
-            let alert = UIAlertController(title: "확인해주세요", message: "입력되지 않은 정보가 있습니다.", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "확인", style: .cancel){(cancle)in}
-            alert.addAction(confirmAction)
-            self.present(alert, animated: true, completion: nil)
+            ShowAlert("조건이 만족되지 않은 정보가 있습니다.")
         }
     }
+    
+    func ShowAlert(_ message: String) {
+        let alert = UIAlertController(title: "확인해주세요", message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .cancel){(cancle)in}
+        alert.addAction(confirmAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func isValid(str:String, condition:String) -> Bool {
         let RegEx = condition
         let Test = NSPredicate(format:"SELF MATCHES %@", RegEx)
@@ -145,7 +176,8 @@ extension SignUpPage{
     
     func configureUI(){
         //다크모드 고려필요
-        view.backgroundColor = UIColor.white
+//        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.systemBackground
         self.view.addSubview(InfoLabel)
         self.view.addSubview(UserInfoArea)
         UserInfoArea.addSubview(UserInfotableView)

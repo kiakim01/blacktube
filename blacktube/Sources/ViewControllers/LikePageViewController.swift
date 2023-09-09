@@ -18,7 +18,7 @@ class LikePageViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        videos = likedVideos
+        videos = loginUser.likedVideos
         tableView.reloadData()
     }
     

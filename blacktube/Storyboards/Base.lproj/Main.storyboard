@@ -162,7 +162,7 @@
         <!--Navigation Controller-->
         <scene sceneID="uxh-JB-kQd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bG1-FT-dsA" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavigation" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="bG1-FT-dsA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="23E-z8-exU">
                         <autoresizingMask key="autoresizingMask"/>

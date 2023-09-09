@@ -24,5 +24,5 @@ struct Video: Equatable, Codable {
     var isLiked: Bool
 }
 
-var likedVideos: [Video] = []
+var likedVideos: [Video] = loginUser.likedVideos
 var videos: [Video] = []

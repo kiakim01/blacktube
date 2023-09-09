@@ -58,6 +58,14 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         else if sender.tag == 1 {
             inputPW = sender.text ?? ""
         }
+        if inputID != "" && inputPW != "" {
+            LoginButton.backgroundColor = UIColor.systemBlue
+            LoginButton.isUserInteractionEnabled = true
+        }
+        else {
+            LoginButton.backgroundColor = UIColor.gray
+            LoginButton.isUserInteractionEnabled = false
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -107,7 +115,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //navigation
     @objc func signUpButtonClick(){
-            let signUpPageVC = SignUpPage()
+        let signUpPageVC = SignUpPage()
         self.navigationController?.pushViewController(signUpPageVC, animated: true)
 //        self.present(signUpPageVC, animated: true)
     }
@@ -128,7 +136,9 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if userData[index!].password == inputPW {
                 ShowAlert("\(userData[index!].Id) 로그인 성공")
                 loginUser = userData[index!]
-                print("현재 로그인유저는 \(loginUser)")
+                UserManager.shared.SaveLoginUser()
+                GoToMain()
+                
             }
             else {
                 ShowAlert("암호가 틀렸습니다.")
@@ -136,6 +146,20 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         
+    }
+    func GoToMain() {
+        let newStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = newStoryboard.instantiateViewController(identifier: "MainNavigation")
+        self.changeRootViewController(newViewController)
+    }
+    func changeRootViewController(_ viewControllerToPresent: UIViewController) {
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = viewControllerToPresent
+            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil)
+        } else {
+            viewControllerToPresent.modalPresentationStyle = .overFullScreen
+            self.present(viewControllerToPresent, animated: true, completion: nil)
+        }
     }
     
     func ShowAlert (_ text: String) {
@@ -145,8 +169,26 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
         present(alert, animated: true)
     }
     
+    func CheckDarkMode() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else { return }
+        if loginUser.isDarkMode{
+            window.overrideUserInterfaceStyle = .dark
+        }
+        else {
+            window.overrideUserInterfaceStyle = .light
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        UserManager.shared.LoadLoginUser()
+        UserManager.shared.LoadUserData()
+        CheckDarkMode()
+        if loginUser != guest {
+            GoToMain()
+        }
+        print(loginUser)
         configureUI()
         setLayout()
     }
@@ -159,7 +201,7 @@ class LoginPage: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 extension LoginPage{
     func configureUI(){
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.systemBackground
         self.view.addSubview(mainImage)
         self.view.addSubview(UserInfoArea)
         UserInfoArea.addSubview(UserInfotableView)

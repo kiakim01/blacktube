@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         videos = []
         tableView.dataSource = self
         tableView.delegate = self
-        
+        CheckDarkMode()
         setAppLogoToNavigationBar()
         fetchYoutubeData()
     }
@@ -77,6 +77,26 @@ class ViewController: UIViewController {
         logoImageView.frame = CGRect(x: 20, y: 5, width: 40, height: 27)
         navigationBar.addSubview(logoImageView)
     }
+    
+    @objc func Tapped (_ sender: UIButton) {
+        if sender.imageView?.image == UIImage(systemName: "heart.fill")?.imageWithColor(color: UIColor.red) {
+            sender.setImage(UIImage(systemName: "heart")?.imageWithColor(color: UIColor.gray), for: .normal)
+        }
+        else {
+            sender.setImage(UIImage(systemName: "heart.fill")?.imageWithColor(color: UIColor.red), for: .normal)
+        }
+    }
+    
+    func CheckDarkMode() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else { return }
+        if loginUser.isDarkMode{
+            window.overrideUserInterfaceStyle = .dark
+        }
+        else {
+            window.overrideUserInterfaceStyle = .light
+        }
+    }
 }
 
 extension ViewController: UITableViewDataSource {
@@ -105,8 +125,9 @@ extension ViewController: UITableViewDataSource {
         
         cell.heartButton.isSelected = false
         cell.heartButton.tintColor = .clear
+        cell.heartButton.addTarget(self, action: #selector(Tapped), for: .touchUpInside)
         
-        if likedVideos.contains(video) {
+        if loginUser.likedVideos.contains(video) {
             let filledHeart = UIImage(systemName: "heart.fill")?.imageWithColor(color: UIColor.red)
             cell.heartButton.setImage(filledHeart, for: .normal)
         }
